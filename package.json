@@ -1,0 +1,22 @@
+{
+  "name": "webdev-final",
+  "version": "1.0.0",
+  "description": "final project for CS5610",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cobrien704/webdev-final.git"
+  },
+  "author": "cobrien704",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cobrien704/webdev-final/issues"
+  },
+  "homepage": "https://github.com/cobrien704/webdev-final#readme",
+  "dependencies": {
+    "express": "^4.15.2"
+  }
+}
