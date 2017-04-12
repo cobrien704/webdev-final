@@ -5,6 +5,7 @@ module.exports= function() {
         username: String,
         password: String,
         firstName: String,
+        lastName: String,
         email: String,
         movies: [{type: mongoose.Schema.Types.ObjectId, ref: 'MovieModel'}],
         dateCreated: { type: Date, default: Date.now },

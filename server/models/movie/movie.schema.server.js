@@ -3,7 +3,9 @@ module.exports= function() {
 
     var MovieSchema = mongoose.Schema({
         title: String,
-        posterURL: String
+        posterURL: String,
+        rating: String,
+        stars: Number
     }, {collection: 'movies'});
 
     return MovieSchema;
