@@ -1,23 +1,28 @@
 (function() {
     angular
-        .module("Mooviews")
+        .module('Mooviews')
         .config(Config);
     function Config($routeProvider) {
         $routeProvider
-            .when("/", {
-                templateUrl: "views/home/templates/login.view.client.html",
-                controller: "LoginController",
-                controllerAs: "model"
+            .when('/', {
+                templateUrl: 'views/home/templates/login.view.client.html',
+                controller: 'LoginController',
+                controllerAs: 'model'
             })
-            .when("/register", {
-                templateUrl: "views/home/templates/register.view.client.html",
-                controller: "RegisterController",
-                controllerAs: "model"
+            .when('/register', {
+                templateUrl: 'views/home/templates/register.view.client.html',
+                controller: 'RegisterController',
+                controllerAs: 'model'
             })
-            .when("/home/:uid", {
-                templateUrl: "views/home/templates/home.view.client.html",
-                controller: "HomeController",
-                controllerAs: "model"
+            .when('/home/:uid', {
+                templateUrl: 'views/home/templates/home.view.client.html',
+                controller: 'HomeController',
+                controllerAs: 'model'
+            })
+            .when('/user/:uid/lists', {
+                templateUrl: 'views/user/templates/movie-lists.view.client.html',
+                controller: 'ListsController',
+                controllerAs: 'model'
             })
     }
 })();

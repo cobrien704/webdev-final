@@ -11,10 +11,12 @@ if (process.env.MLAB_USERNAME) {
 
 mongoose.connect(connectionString);
 
-var userModel  = require('./user/user.model.server')();
-var movieModel = require('./movie/movie.model.server')();
+var userModel      = require('./user/user.model.server')();
+var movieListModel = require('./movie-list/movie-list.model.server')();
+var movieModel     = require('./movie/movie.model.server')();
 
 module.exports = {
     userModel: userModel,
+    movieListModel: movieListModel,
     movieModel: movieModel
 };

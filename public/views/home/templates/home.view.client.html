@@ -2,6 +2,10 @@
 <h1>Home</h1>
 <hr class="colorgraph">
 {{model.user}}
+#/user/{{model.user._id}}/lists
+<div class="col-xs-6 col-sm-6 col-md-6">
+    <a href="#/user/{{model.user._id}}/lists" class="btn btn-lg btn-primary btn-block">lists</a>
+</div>
 <div ng-repeat="movie in model.popularMovies">
     <div class="popular-movie">
         <h5>{{movie.original_title}}</h5>

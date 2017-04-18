@@ -1,7 +1,7 @@
 (function() {
     angular
-        .module("Mooviews")
-        .controller("RegisterController", RegisterController);
+        .module('Mooviews')
+        .controller('RegisterController', RegisterController);
 
     function RegisterController($location, $rootScope, UserService) {
         var vm = this;
