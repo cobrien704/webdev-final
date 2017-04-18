@@ -7,6 +7,11 @@
         var vm = this;
         vm.searchMovies = searchMovies;
 
+        $("#addForm").hide();
+        $("#addFormButton").click(function(){
+            $("#addForm").toggle();
+        });
+
         function searchMovies(query) {
             MovieService
                 .searchMovies(query)
@@ -14,6 +19,5 @@
                     vm.movies = response.data.results;
                 });
         }
-
     }
 })();

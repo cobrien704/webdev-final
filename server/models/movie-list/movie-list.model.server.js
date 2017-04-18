@@ -15,4 +15,9 @@ module.exports = function() {
         return MovieListModel.create(list);
     }
 
+    function addMovieToList(movie, list) {
+
+    };
+
+
 };

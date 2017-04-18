@@ -1,6 +1,33 @@
 <div class="container-fluid">
 
-    <div class="col-sm-3 hidden-xs">
+    <hr class="colorgraph">
+
+    <div class="col-md-4 hidden-xs">
+        <h4 style="display: inline-block">My Lists</h4>
+        <button type="button" class="btn btn-default" id="addFormButton" style="float: right; display: inline-block">
+            <span class="gliphicon glyphicon-plus"></span>
+        </button>
+        <form id="addForm">
+            <div class="form-group">
+                <input ng-model="list.name"
+                       type="text"
+                       id="name"
+                       class="form-control"
+                       placeholder="Title"/>
+            </div>
+            <div class="form-group">
+                <textarea ng-model="list.description"
+                          type="text"
+                          id="description"
+                          class="form-control"
+                          placeholder="Description"></textarea>
+            </div>
+            <a class="btn btn-success btn-block">
+                Create List
+            </a>
+            <hr class="colorgraph">
+        </form>
+
         <ul class="list-group">
             <li ng-repeat="list in model.user.movieLists" class="list-group-item">
 
@@ -9,28 +36,33 @@
 
     </div>
 
-    <div class="col-sm-9 container-fluid">
-        <div class="col-md-6">
-
-            <!-- Search Form -->
-            <form role="form">
-
-                <!-- Search Field -->
-                <div class="row">
-                    <div class="form-group">
-                        <div class="input-group">
-                            <input class="form-control" type="text" ng-model="searchValue" name="search" placeholder="Enter movie name" required/>
-                            <span class="input-group-btn">
-                                <button class="btn btn-success" type="submit" ng-click="model.searchMovies(searchValue)"><span class="glyphicon glyphicon-search" aria-hidden="true"><span style="margin-left:10px;">Search</span></button>
-                            </span>
-                            </span>
-                        </div>
+    <div class="col-md-8">
+        <form role="form">
+            <div class="row">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input class="form-control" type="text" ng-model="searchValue" name="search" placeholder="Enter movie name" required/>
+                        <span class="input-group-btn">
+                            <button class="btn btn-success" type="submit" ng-click="model.searchMovies(searchValue)"><span class="glyphicon glyphicon-search" aria-hidden="true"><span style="margin-left:10px;">Search</span></button>
+                        </span>
+                        </span>
                     </div>
                 </div>
+            </div>
+        </form>
 
-            </form>
-
-            {{model.movies}}
-        </div>
+        <ul class="list-group">
+            <li ng-repeat="movie in model.movies" class="list-group-item">
+                <div class="container">
+                    <div class="col-md-2">
+                        <img src="http://image.tmdb.org/t/p/w154/{{movie.poster_path}}"/>
+                    </div>
+                    <div class="col-md-6">
+                        <h3>{{movie.title}}</h3>
+                        <p>{{movie.overview}}</p>                        
+                    </div>
+                </div>
+            </li>
+        </ul>
     </div>
 </div>

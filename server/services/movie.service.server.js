@@ -40,7 +40,7 @@ module.exports = function(app, model) {
 
     function searchMovies(req, res) {
         var query = req.query['query'];
-        var apiURL = '/search/movie/'
+        var apiURL = '/search/movie/';
         var params = {
             'query': query,
             'language': 'en-US',
@@ -55,6 +55,8 @@ module.exports = function(app, model) {
                 var info = JSON.parse(body);
 
                 res.json(info);
+            } else {
+                res.sendStatus(response.statusCode);
             }
         });
     }
