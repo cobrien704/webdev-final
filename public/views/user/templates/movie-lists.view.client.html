@@ -9,9 +9,9 @@
         </button>
         <form id="addForm">
             <div class="form-group">
-                <input ng-model="list.name"
+                <input ng-model="list.title"
                        type="text"
-                       id="name"
+                       id="title"
                        class="form-control"
                        placeholder="Title"/>
             </div>
@@ -22,18 +22,22 @@
                           class="form-control"
                           placeholder="Description"></textarea>
             </div>
-            <a class="btn btn-success btn-block">
+            <a class="btn btn-success btn-block" ng-click="model.createList(list)">
                 Create List
             </a>
             <hr class="colorgraph">
         </form>
 
-        <ul class="list-group">
-            <li ng-repeat="list in model.user.movieLists" class="list-group-item">
+        {{selected._id || "none"}}
 
-            </li>
-        </ul>
-
+        <div class="list-group">
+            <a ng-repeat="list in model.movieLists" ng-click="$parent.selected = list" ng-class="{active:selected==list}" class="list-group-item">
+                {{list.title}}
+                <span class="badge">
+                    {{list.movies.length}}
+                </span>
+            </a>
+        </div>
     </div>
 
     <div class="col-md-8">
@@ -45,7 +49,6 @@
                         <span class="input-group-btn">
                             <button class="btn btn-success" type="submit" ng-click="model.searchMovies(searchValue)"><span class="glyphicon glyphicon-search" aria-hidden="true"><span style="margin-left:10px;">Search</span></button>
                         </span>
-                        </span>
                     </div>
                 </div>
             </div>
@@ -53,16 +56,23 @@
 
         <ul class="list-group">
             <li ng-repeat="movie in model.movies" class="list-group-item">
-                <div class="container">
-                    <div class="col-md-2">
+                <div class="row">
+                    <div class="col-md-3">
                         <img src="http://image.tmdb.org/t/p/w154/{{movie.poster_path}}"/>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-9">
                         <h3>{{movie.title}}</h3>
                         <p>{{movie.overview}}</p>                        
                     </div>
                 </div>
+                <a class="btn btn-success btn-block">
+                    Add to list
+                </a>
             </li>
         </ul>
+
+        <a class="btn btn-danger btn-block" ng-click="model.deleteList(selected._id)">
+            Delete List
+        </a>
     </div>
 </div>

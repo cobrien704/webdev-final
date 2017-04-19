@@ -7,7 +7,7 @@ module.exports= function() {
         firstName: String,
         lastName: String,
         email: String,
-        movies: [{type: mongoose.Schema.Types.ObjectId, ref: 'MovieModel'}],
+        movieLists: [{type: mongoose.Schema.Types.ObjectId, ref: 'MovieListModel'}],
         dateCreated: { type: Date, default: Date.now },
         google: {
             id:    String,

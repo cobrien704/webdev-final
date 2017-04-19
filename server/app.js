@@ -3,4 +3,5 @@ module.exports = function(app) {
 
     require('./services/user.service.server')(app, model);
     require('./services/movie.service.server')(app, model);
+    require('./services/movie-list.service.server.js')(app, model);
 };
