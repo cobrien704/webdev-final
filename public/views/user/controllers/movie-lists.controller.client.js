@@ -3,9 +3,10 @@
         .module('Mooviews')
         .controller('ListsController', ListsController);
 
-    function ListsController($location, $routeParams, MovieService, MovieListService) {
+    function ListsController($location, $scope, $routeParams, MovieService, MovieListService) {
         var vm = this;
         vm.userId = $routeParams['uid'];
+        vm.setSelected = setSelected;
         vm.searchMovies = searchMovies;
         vm.createList = createList;
         vm.addMovieToList = addMovieToList;
@@ -17,6 +18,8 @@
         });
 
         function init() {
+            $('#addForm').trigger('reset');
+
             MovieListService
                 .getMovieListsForUser(vm.userId)
                 .success(function (data) {
@@ -25,6 +28,15 @@
         }
         init();
 
+        function setSelected(list) {
+            $scope.selected = list;
+
+            MovieListService
+                .getMovieListById(list._id)
+                .success(function (data) {
+                    vm.selectedMovieListMovies = data;
+                });
+        }
 
         function searchMovies(query) {
             MovieService
@@ -34,8 +46,12 @@
                 });
         }
 
-        function addMovieToList() {
-
+        function addMovieToList(listId, movie) {
+            MovieService
+                .createMovie(listId, movie)
+                .then(function (response) {
+                   init();
+                });
         }
 
         function createList(list) {

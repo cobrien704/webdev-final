@@ -8,6 +8,8 @@ module.exports = function() {
     var api = {
         createList: createList,
         getMovieListsForUser: getMovieListsForUser,
+        getMovieListById: getMovieListById,
+        addMovieToList: addMovieToList,
         deleteList: deleteList
     };
     return api;
@@ -21,7 +23,11 @@ module.exports = function() {
         return MovieListModel.find({ _user: userId });
     }
 
-    function addMovieToList(movie, list) {
+    function getMovieListById(listId) {
+        return MovieListModel.findById({ _id: listId });
+    }
+
+    function addMovieToList(listId, movie) {
 
     }
 

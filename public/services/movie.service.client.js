@@ -6,11 +6,16 @@
     function MovieService($http) {
 
         var api = {
+            'createMovie': createMovie,
             'getCurrentPopularMovies': getCurrentPopularMovies,
             'searchMovies': searchMovies
         };
 
         return api;
+
+        function createMovie(listId, movie) {
+            return $http.post('/api/movie/' + listId, movie);
+        }
 
         function getCurrentPopularMovies() {
             return $http.get('/api/movie/getCurrentPopularMovies');

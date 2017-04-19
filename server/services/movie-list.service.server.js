@@ -5,6 +5,7 @@ module.exports = function(app, model) {
     var userModel = model.userModel;
 
     app.post('/api/user/:userId/movieList', createList);
+    app.get('/api/movieList/:listId', getMovieListById);
     app.get('/api/user/:userId/movieList', getMovieListsForUser);
     app.delete('/api/movieList/:listId', deleteList);
 
@@ -34,6 +35,22 @@ module.exports = function(app, model) {
         }
     }
 
+    function getMovieListById (req, res) {
+        var listId = req.params['listId'];
+
+        movieListModel
+            .getMovieListById(listId)
+            .then(function (list) {
+                if (list) {
+                    res.json(list);
+                } else {
+                    res.sendStatus(404);
+                }
+            }, function () {
+                res.sendStatus(500);
+            });
+    }
+
     function getMovieListsForUser (req, res) {
         var userId = req.params['userId'];
 
@@ -48,8 +65,6 @@ module.exports = function(app, model) {
 
     function deleteList(req, res) {
         var listId = req.params['listId'];
-
-        console.log(listId);
 
         movieListModel
             .deleteList(listId)

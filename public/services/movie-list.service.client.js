@@ -8,6 +8,8 @@
         var api = {
             createList: createList,
             getMovieListsForUser: getMovieListsForUser,
+            getMovieListById: getMovieListById,
+            addMovieToList: addMovieToList,
             deleteList: deleteList
         };
         return api;
@@ -18,6 +20,14 @@
 
         function getMovieListsForUser(userId) {
             return $http.get('/api/user/' + userId + '/movieList');
+        }
+
+        function getMovieListById(listId) {
+            return $http.get('/api/movieList/' + listId);
+        }
+
+        function addMovieToList(listId, movie) {
+            return $http.post('/api/movieList/' + listId, movie);
         }
 
         function deleteList(listId) {

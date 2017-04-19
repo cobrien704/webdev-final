@@ -2,11 +2,45 @@ module.exports = function(app, model) {
   var request = require('request');
 
   var movieModel = model.movieModel;
+  var movieListModel = model.movieListModel;
 
-  var baseURL = 'https://api.themoviedb.org/3'
+  var baseURL = 'https://api.themoviedb.org/3';
 
+  app.post('/api/movie/:listId', addMovieToList);
   app.get('/api/movie/getCurrentPopularMovies', getCurrentPopularMovies);
   app.get('/api/movie/search', searchMovies);
+
+
+  function addMovieToList(req, res) {
+      var listId = req.params['listId'];
+      var movie = req.body;
+
+      var movieToAdd = {
+          'title': movie.title,
+          'posterURL': 'http://image.tmdb.org/t/p/w154/' + movie.poster_path,
+          'description': movie.description
+      };
+
+      if (movie) {
+          movieModel
+              .createMovie(listId, movieToAdd)
+              .then(function (addedMovie) {
+                  movieListModel
+                      .getMovieListById(listId)
+                      .then(function (list) {
+                          list.movies.push(addedMovie._id);
+                          list.save();
+                          res.sendStatus(200);
+                      }, function () {
+                          res.sendStatus(404);
+                      });
+              }, function() {
+                  res.sendStatus(500);
+              });
+      } else {
+          res.sendStatus(404)
+      }
+  }
 
 
   function createURL(apiURL, params) {

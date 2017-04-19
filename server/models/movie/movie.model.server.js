@@ -11,7 +11,8 @@ module.exports = function() {
 
     return api;
 
-    function createMovie(movie) {
+    function createMovie(listId, movie) {
+        movie._list = listId;
         return MovieModel.create(movie);
     }
 
