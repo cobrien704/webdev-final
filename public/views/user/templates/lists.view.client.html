@@ -26,8 +26,8 @@
             <hr class="colorgraph">
         </form>
 
-        <div class="list-group">
-            <a ng-repeat="list in model.movieLists" ng-click="model.setSelected(list)" ng-class="{active:selected==list}" class="list-group-item">
+        <div id="list-select" class="list-group">
+            <a ng-repeat="list in model.movieLists" id="list-select2" ng-click="model.setSelected(list)" id="list-select3" ng-class="{active:selected==list}" class="list-group-item">
                 {{list.title}}
                 <span class="badge">
                     {{list.movies.length}}

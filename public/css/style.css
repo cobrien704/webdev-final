@@ -76,12 +76,28 @@
 
 /*trying to change button color*/
 
+.btn-primary {
+    background: #31b0d5;
+}
+
 .btn-danger {
-    background: #c3556a;
+    background: #dd5683;
 }
 
 .btn-success {
     background: #94d571;
+}
+
+#list-select :active{
+    background: #31b0d5;
+}
+
+#list-select2 ::selection{
+    background: #31b0d5;
+}
+
+#list-select3{
+    background: #31b0d5;
 }
 
 /*trying to change link color*/
