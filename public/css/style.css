@@ -55,3 +55,10 @@ body {
     color: $white;
 }
 
+/*trying to add padding to tags on movie details*/
+.tags {
+    border-radius: 2px;
+    font-weight: bold;
+    padding: 2px 4px;
+    margin: 0 2px;
+}
