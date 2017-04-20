@@ -1,24 +1,25 @@
 <div ng-include src="'views/templates/nav-bar.template.client.html'"></div>
 
+
 <div class="container-fluid">
-    <div class="col-md-offset-1 col-md-10">
+    <div class="col-md-offset-3 col-md-6">
         <div class="list-group">
-            <a ng-repeat="feedItem in model.feed" class="list-group-item">
-                <div ng-switch="feedItem.type">
+            <div ng-repeat="feedItem in model.feed" class="list-group-item">
+                <div id="feed" ng-switch="feedItem.type">
                     <div ng-switch-when="CREATE">
-                        <p>{{feedItem.user.firstName}} created a new list called {{feedItem.movieList.title}}</p>
+                        <p><a href="#/user/{{feedItem.user._id}}/profile">{{feedItem.user.firstName}}</a> created a new list called <a href="#/user/{{feedItem.user._id}}/lists">“{{feedItem.movieList.title}}”</a></p>
                         <p ng-bind="feedItem.dateCreated | date:'h:mma MM/dd/yyyy'">{{feedItem.dateCreated}}</p>
                     </div>
                     <div ng-switch-when="ADD">
-                        <p>{{feedItem.user.firstName}} added a new movie to their list {{feedItem.movieList.title}} called {{feedItem.movie.title}}</p>
+                        <p><a href="#/user/{{feedItem.user._id}}/profile">{{feedItem.user.firstName}}</a> added a new movie to their list <a href="#/user/{{feedItem.user._id}}/lists">“{{feedItem.movieList.title}}”</a> called <a href="#/user/{{model.user._id}}/movie/{{feedItem.movie.id}}">“{{feedItem.movie.title}}”</a></p>
                         <p ng-bind="feedItem.dateCreated | date:'h:mma MM/dd/yyyy'">{{feedItem.dateCreated}}</p>
                     </div>
                     <div ng-switch-when="DELETE">
-                        <p>{{feedItem.user.firstName}} deleted {{feedItem.movie.title}} from their list {{feedItem.movieList.title}}</p>
+                        <p><a href="#/user/{{feedItem.user._id}}/profile">{{feedItem.user.firstName}}</a> deleted <a href="#/user/{{feedItem.user._id}}/movie/{{model.movie._mid}}">“{{feedItem.movie.title}}”</a> from their list <a href="#/user/{{model.user._id}}/lists">“{{feedItem.movieList.title}}”</a></p>
                         <p ng-bind="feedItem.dateCreated | date:'h:mma MM/dd/yyyy'">{{feedItem.dateCreated}}</p>
                     </div>
                     <div ng-switch-when="FOLLOW">
-                        <p>{{feedItem.user.firstName}} started following {{feedItem.followUser.firstName}} {{feedItem.followUser.lastName}}</p>
+                        <p><a href="#/user/{{feedItem.user._id}}/profile">{{feedItem.user.firstName}}</a> started following <a href="#/user/{{feedItem.user._id}}/profile">{{feedItem.followUser.firstName}} {{feedItem.followUser.lastName}}</a></p>
                         <p ng-bind="feedItem.dateCreated | date:'h:mma MM/dd/yyyy'">{{feedItem.dateCreated}}</p>
                     </div>
                 </div>
@@ -27,9 +28,12 @@
     </div>
 </div>
 
+
+
 <div ng-repeat="movie in model.popularMovies">
     <div class="popular-movie">
         <h5>{{movie.original_title}}</h5>
         <img class="popular-movie-poster" src="http://image.tmdb.org/t/p/w92/{{movie.poster_path}}"/>
     </div>
+</div>
 </div>

@@ -68,6 +68,17 @@
                                    tabindex="6">
                         </div>
                     </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <input ng-model="user.favGenre"
+                                   type="text"
+                                   name="favGenre"
+                                   id="favGenre"
+                                   class="form-control input-lg"
+                                   placeholder="Favorite Movie Genre!"
+                                   tabindex="6">
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-8 col-sm-9 col-md-9">
@@ -75,9 +86,9 @@
                     </div>
                 </div>
                 <hr class="colorgraph">
-                <div class="row">
+                <div id="register" class="row">
                     <div class="col-xs-12 col-md-6"></div>
-                    <div class="col-xs-12 col-md-6"><a ng-click="model.register(user)" class="btn btn-primary btn-block btn-lg" tabindex="7">Register</a></div>
+                    <a ng-click="model.register(user)" class="btn btn-primary btn-block btn-lg" tabindex="7">Register</a>
                 </div>
             </form>
         </div>

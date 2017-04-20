@@ -69,6 +69,11 @@
     padding: 2px 4px;
 }
 
+/*feed resize*/
+#feed {
+    font-size: medium;
+}
+
 /*trying to change button color*/
 
 .btn-danger {
@@ -81,10 +86,18 @@
 
 /*trying to change link color*/
 #register a:link {
+     color: white;
+ }
+
+#register a:visited {
     color: white;
 }
 
-#register a:visited {
+#register-g a:link {
+    color: white;
+}
+
+#register-g a:visited {
     color: white;
 }
 

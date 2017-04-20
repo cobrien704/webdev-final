@@ -12,6 +12,8 @@
                 <div class="col-sm-12">
                     <div class="col-xs-12 col-sm-8">
                         <h2>{{model.user.firstName}} {{model.user.lastName}}</h2>
+                        <strong>Birthday: </strong> {{model.user.birthday}}
+                        <br>
                         <strong>User Since: </strong><text ng-bind="model.user.dateCreated | date:'MM/dd/yyyy'"></text>
                         <p><strong>Favorite Movies: </strong> Shrek, Shrek 2, Shrek the Third, Puss in Boots, Avatar. </p>
                         <p><strong>Genres: </strong>
