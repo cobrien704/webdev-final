@@ -19,9 +19,14 @@ module.exports = function(app, model) {
             movieListModel
                 .getMovieListById(listId)
                 .then(function (list) {
-                    list.movies.push(movie.id);
-                    list.save();
-                    res.sendStatus(200);
+                    if (list.movies.indexOf(movie.id) !== -1) {
+                        res.sendStatus(400);
+                    } else {
+                        list.movies.push(movie.id);
+                        list.save();
+                        res.sendStatus(200);
+                    }
+
                 }, function () {
                     res.sendStatus(500);
                 });

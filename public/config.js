@@ -19,6 +19,11 @@
                 controller: 'ActivityController',
                 controllerAs: 'model'
             })
+            .when('/user/:uid/discover', {
+                templateUrl: 'views/user/templates/discover.view.client.html',
+                controller: 'DiscoverController',
+                controllerAs: 'model'
+            })
             .when('/user/:uid/lists', {
                 templateUrl: 'views/user/templates/lists.view.client.html',
                 controller: 'ListsController',

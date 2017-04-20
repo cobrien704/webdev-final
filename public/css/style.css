@@ -17,3 +17,7 @@
 .mooviews-font {
     color: #ed5495 !important;
 }
+
+.hidden {
+    display: none;
+}
