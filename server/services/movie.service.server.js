@@ -1,59 +1,57 @@
 module.exports = function(app, model) {
-  var request = require('request');
+    var request = require('request');
+    var movieModel = model.movieModel;
+    var movieListModel = model.movieListModel;
 
-  var movieModel = model.movieModel;
-  var movieListModel = model.movieListModel;
+    var baseURL = 'https://api.themoviedb.org/3';
 
-  var baseURL = 'https://api.themoviedb.org/3';
+    app.post('/api/movie/:listId', addMovieToList);
+    app.get('/api/movie/getCurrentPopularMovies', getCurrentPopularMovies);
+    app.get('/api/movie/search', searchMovies);
+    app.get('/api/movie/:movieId', lookupMovieById);
 
-  app.post('/api/movie/:listId', addMovieToList);
-  app.get('/api/movie/getCurrentPopularMovies', getCurrentPopularMovies);
-  app.get('/api/movie/search', searchMovies);
+    function addMovieToList(req, res) {
+        var listId = req.params['listId'];
+        var movie = req.body;
 
-
-  function addMovieToList(req, res) {
-      var listId = req.params['listId'];
-      var movie = req.body;
-
-      var movieToAdd = {
+        var movieToAdd = {
           'title': movie.title,
           'posterURL': 'http://image.tmdb.org/t/p/w154/' + movie.poster_path,
           'description': movie.description
-      };
+        };
 
-      if (movie) {
-          movieModel
-              .createMovie(listId, movieToAdd)
-              .then(function (addedMovie) {
-                  movieListModel
-                      .getMovieListById(listId)
-                      .then(function (list) {
-                          list.movies.push(addedMovie._id);
-                          list.save();
-                          res.sendStatus(200);
-                      }, function () {
-                          res.sendStatus(404);
-                      });
-              }, function() {
-                  res.sendStatus(500);
-              });
-      } else {
-          res.sendStatus(404)
+        if (movie) {
+            movieModel
+                .createMovie(listId, movieToAdd)
+                .then(function (addedMovie) {
+                    movieListModel
+                        .getMovieListById(listId)
+                        .then(function (list) {
+                            list.movies.push(addedMovie._id);
+                            list.save();
+                            res.sendStatus(200);
+                        }, function () {
+                            res.sendStatus(404);
+                        });
+                }, function() {
+                    res.sendStatus(500);
+                });
+        } else {
+            res.sendStatus(404)
+        }
+    }
+
+
+    function createURL(apiURL, params) {
+        var baseURL = 'https://api.themoviedb.org/3'
+
+        var paramsURL = '';
+        for (var key in params) {
+            paramsURL += '&' + key + '=' + params[key];
+        }
+
+        return baseURL + apiURL + '?api_key=' + process.env.MOVIEDB_APIKEY + paramsURL;
       }
-  }
-
-
-  function createURL(apiURL, params) {
-      var baseURL = 'https://api.themoviedb.org/3'
-
-      var paramsURL = '';
-      for (var key in params) {
-          paramsURL += '&' + key + '=' + params[key];
-      }
-
-      return baseURL + apiURL + '?api_key=' + process.env.MOVIEDB_APIKEY + paramsURL;
-  }
-
     function getCurrentPopularMovies(req, res) {
         var apiURL = '/movie/popular/';
         var params = {
@@ -83,6 +81,26 @@ module.exports = function(app, model) {
         };
 
         var requestURL = createURL(apiURL, params);
+
+        request(requestURL, function (error, response, body) {
+            if (!error && response.statusCode === 200) {
+                var info = JSON.parse(body);
+
+                res.json(info);
+            } else {
+                res.sendStatus(response.statusCode);
+            }
+        });
+    }
+
+    function lookupMovieById(req, res) {
+        var movieId = req.params['movieId'];
+        var apiURl = '/movie/' + movieId;
+        var params = {
+            'language': 'en-US'
+        };
+
+        var requestURL = createURL(apiURl, params);
 
         request(requestURL, function (error, response, body) {
             if (!error && response.statusCode === 200) {

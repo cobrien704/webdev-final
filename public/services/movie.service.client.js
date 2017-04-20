@@ -8,7 +8,8 @@
         var api = {
             'createMovie': createMovie,
             'getCurrentPopularMovies': getCurrentPopularMovies,
-            'searchMovies': searchMovies
+            'searchMovies': searchMovies,
+            'lookupMovieById': lookupMovieById
         };
 
         return api;
@@ -23,6 +24,10 @@
 
         function searchMovies(query) {
             return $http.get('/api/movie/search?query=' + query);
+        }
+
+        function lookupMovieById(id) {
+            return $http.get('/api/movie/' + id);
         }
     }
 
