@@ -54,10 +54,10 @@
 
                                 if (vm.user.accountType === 'CHILD') {
                                     if (movie.contentRating === 'G' || movie.contentRating === 'PG') {
-                                            vm.movies.push(movie);
+                                        vm.movies.push(movie);
                                     }
                                 } else {
-                                    vm.movies = movies;
+                                    vm.movies.push(movie);
                                 }
                             });
                     });
