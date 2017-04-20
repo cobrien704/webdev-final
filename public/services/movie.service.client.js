@@ -6,7 +6,7 @@
     function MovieService($http) {
 
         var api = {
-            'createMovie': createMovie,
+            'addMovieToList': addMovieToList,
             'getCurrentPopularMovies': getCurrentPopularMovies,
             'searchMovies': searchMovies,
             'lookupMovieById': lookupMovieById
@@ -14,7 +14,7 @@
 
         return api;
 
-        function createMovie(listId, movie) {
+        function addMovieToList(listId, movie) {
             return $http.post('/api/movie/' + listId, movie);
         }
 

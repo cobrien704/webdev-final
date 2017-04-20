@@ -61,7 +61,7 @@
 
         function addMovieToList(listId, movie) {
             MovieService
-                .createMovie(listId, movie)
+                .addMovieToList(listId, movie)
                 .then(function (response) {
                    init();
                 });

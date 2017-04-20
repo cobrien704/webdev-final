@@ -5,7 +5,7 @@ module.exports= function() {
         _user: {type: mongoose.Schema.Types.ObjectId, ref:'UserModel', required: true},
         title: String,
         description: String,
-        movies: [{type: mongoose.Schema.Types.ObjectId, ref: 'MovieModel'}]
+        movies: []
     }, {collection: 'movie-lists'});
 
     return MovieListSchema;

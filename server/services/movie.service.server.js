@@ -14,26 +14,14 @@ module.exports = function(app, model) {
         var listId = req.params['listId'];
         var movie = req.body;
 
-        var movieToAdd = {
-          'title': movie.title,
-          'posterURL': 'http://image.tmdb.org/t/p/w154/' + movie.poster_path,
-          'description': movie.description
-        };
-
         if (movie) {
-            movieModel
-                .createMovie(listId, movieToAdd)
-                .then(function (addedMovie) {
-                    movieListModel
-                        .getMovieListById(listId)
-                        .then(function (list) {
-                            list.movies.push(addedMovie._id);
-                            list.save();
-                            res.sendStatus(200);
-                        }, function () {
-                            res.sendStatus(404);
-                        });
-                }, function() {
+            movieListModel
+                .getMovieListById(listId)
+                .then(function (list) {
+                    list.movies.push(movie.id);
+                    list.save();
+                    res.sendStatus(200);
+                }, function () {
                     res.sendStatus(500);
                 });
         } else {
