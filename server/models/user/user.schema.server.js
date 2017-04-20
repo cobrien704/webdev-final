@@ -8,6 +8,7 @@ module.exports= function() {
         lastName: String,
         email: String,
         movieLists: [{type: mongoose.Schema.Types.ObjectId, ref: 'MovieListModel'}],
+        following: [{type: mongoose.Schema.Types.ObjectId, ref: 'UserModel'}],
         dateCreated: { type: Date, default: Date.now },
         google: {
             id:    String,

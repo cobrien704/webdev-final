@@ -8,7 +8,8 @@ module.exports = function() {
     var api = {
         createUser: createUser,
         findUserById: findUserById,
-        findUserByEmail: findUserByEmail
+        findUserByEmail: findUserByEmail,
+        findUsersByQuery: findUsersByQuery
     };
 
     return api;
@@ -25,4 +26,11 @@ module.exports = function() {
         return UserModel.findOne({ email: email });
     }
 
+    function findUsersByQuery(query) {
+        return UserModel.find(
+            {$or : [ { firstName: {"$regex": query, "$options": "i" }},
+               { lastName: {"$regex": query, "$options": "i" }},
+               { email: {"$regex": query, "$options": "i" }}]});
+
+    }
 };

@@ -6,8 +6,14 @@
     function ProfileController($location, $scope, $routeParams, UserService, MovieListService) {
         var vm = this;
         vm.userId = $routeParams['uid'];
+        vm.searchForUsers = searchForUsers;
+        vm.followUser = followUser;
+
 
         function init() {
+            $('#successAlert').hide();
+            $('#dangerAlert').hide();
+
             UserService
                 .findUserById(vm.userId)
                 .then(function(response) {
@@ -22,6 +28,40 @@
                 });
         }
         init();
+
+
+        function searchForUsers(query) {
+            UserService
+                .findUserByQuery(query)
+                .then(function (response) {
+                    vm.friendsSearchResults = response.data;
+                })
+        }
+
+        function followUser(followUser) {
+            UserService
+                .followUser(vm.userId, followUser._id)
+                .success(function (response) {
+                    var successAlert = $('#successAlert');
+                    successAlert.html("<strong>Success!</strong> You are now following " + followUser.firstName + "!");
+                    successAlert.show();
+                    $('html,body').animate({ scrollTop: 0 }, 'slow');
+
+                    setTimeout(function(){
+                        $('#successAlert').hide();
+                    }, 10000);
+                })
+                .error(function (response) {
+                    var dangerAlert = $('#dangerAlert');
+                    dangerAlert.html("<strong>Error!</strong> You already follow " + followUser.firstName + "!");
+                    dangerAlert.show();
+                    $('html,body').animate({ scrollTop: 0 }, 'slow');
+
+                    setTimeout(function(){
+                        $('#dangerAlert').hide();
+                    }, 10000);
+                });
+        }
 
     }
 })();

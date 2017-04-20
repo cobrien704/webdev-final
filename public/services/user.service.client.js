@@ -8,7 +8,9 @@
         var api = {
             'createUser'      : createUser,
             'findUserByEmail' : findUserByEmail,
-            'findUserById'    : findUserById
+            'findUserById'    : findUserById,
+            'findUserByQuery' : findUserByQuery,
+            'followUser'      : followUser
         };
         return api;
 
@@ -22,6 +24,14 @@
 
         function findUserById(id) {
             return $http.get('/api/user?id=' + id);
+        }
+
+        function findUserByQuery(query) {
+            return $http.get('/api/user?query=' + query);
+        }
+
+        function followUser(userId, followUserId) {
+            return $http.post('/api/'+ userId + '/follow/' + followUserId);
         }
     }
 })();
