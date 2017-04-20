@@ -12,6 +12,16 @@
 
 
         function init() {
+            $("#showFollowing").hide();
+            $("#showFollowingButton").click(function(){
+                $("#showFollowing").toggle();
+            });
+
+            $("#showLists").hide();
+            $("#showListsButton").click(function(){
+                $("#showLists").toggle();
+            });
+
             $('#successAlert').hide();
             $('#dangerAlert').hide();
 
@@ -21,12 +31,33 @@
                     var user = response.data;
 
                     if (user) {
-                        vm.user = user
+                        vm.user = user;
+                        vm.followingUsers = [];
+                        vm.userMovieLists = [];
+
+                        vm.user.following.forEach(function(followId) {
+                            UserService
+                                .findUserById(followId)
+                                .then(function (response) {
+                                    vm.followingUsers.push(response.data);
+                                });
+                        });
+
+                        vm.user.movieLists.forEach(function(listId) {
+                            MovieListService
+                                .getMovieListById(listId)
+                                .then(function (response) {
+                                    vm.userMovieLists.push(response.data);
+                                });
+                        })
+
                     } else {
                         vm.user = 'ERROR';
                         $location.url('/');
                     }
                 });
+
+
         }
         init();
 
@@ -80,9 +111,5 @@
                     }, 10000);
                 });
         }
-        $("#showFollowing").hide();
-        $("#showFollowingButton").click(function(){
-            $("#showFollowing").toggle();
-        });
     }
 })();

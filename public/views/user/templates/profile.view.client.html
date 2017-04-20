@@ -1,7 +1,5 @@
 <div ng-include src="'views/templates/nav-bar.template.client.html'"></div>
-{{model.user}}
-{{model.user.birthday}}
-{{model.movieList}}
+
 <div id="successAlert" class="alert alert-success" role="alert"></div>
 <div id="dangerAlert" class="alert alert-danger" role="alert"></div>
 
@@ -15,11 +13,8 @@
                         <strong>Birthday: </strong> {{model.user.birthday}}
                         <br>
                         <strong>User Since: </strong><text ng-bind="model.user.dateCreated | date:'MM/dd/yyyy'"></text>
-                        <p><strong>Favorite Movies: </strong> Shrek, Shrek 2, Shrek the Third, Puss in Boots, Avatar. </p>
-                        <p><strong>Genres: </strong>
-                            <span class="genre-tag">comedy</span>
-                            <span class="genre-tag">romance</span>
-                            <span class="genre-tag">horror</span>
+                        <p><strong>Favorite Genre: </strong>
+                            <span class="genre-tag">{{model.user.favGenre}}</span>
                         </p>
                     </div>
                     <br>
@@ -27,22 +22,16 @@
                 </div>
                 <div class="col-xs-12 divider text-center">
                     <div class="col-xs-12 col-sm-4 emphasis">
-                        <h2><strong> 20 </strong></h2>
-                        <p><small>Followers</small></p>
-                        <button ng-if="false" class="btn btn-success btn-block"><span class="fa fa-plus-circle"></span>  Follow </button>
-                        <button ng-if="true" class="btn btn-success btn-block"><span class="fa fa-user"></span>  Followers</button>
-                    </div>
-                    <div class="col-xs-12 col-sm-4 emphasis">
                         <h2><strong>{{model.user.following.length}}</strong></h2>
                         <p><small>Following</small></p>
                         <a class="btn btn-block" id="showFollowingButton" style="background-color: #31b0d5; color: white"><span class="fa fa-user" style="color: white"></span> Following</a>
-
-                        <!--<a onclick="{{model.user.following}}" class="btn btn-info btn-block" style="background-color: #31b0d5; color: white"><span class="fa fa-user"></span>  Following </a>-->
                     </div>
+                    <div class="col-xs-12 col-sm-4 emphasis">
+                        </div>
                     <div class="col-xs-12 col-sm-4 emphasis">
                         <h2><strong>{{model.user.movieLists.length}}</strong></h2>
                         <p><small>Lists</small></p>
-                        <a class="btn btn-block" style="background-color: #ed5495; color: white" href="#/user/{{model.user._id}}/lists"><span class="fa fa-list" style="color: white"></span>  Lists </a>
+                        <a class="btn btn-block" id="showListsButton" style="background-color: #ed5495; color: white"><span class="fa fa-list" style="color: white"></span>  Lists </a>
                     </div>
                         </div>
                     </div>
@@ -52,17 +41,32 @@
         <div class="col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
             <hr class="colorgraph">
             <form id="showFollowing">
+                <h3>Following</h3>
                 <div class="list-group">
-                    <li ng-repeat="user in model.user.following" class="list-group-item">
+                    <li ng-repeat="user in model.followingUsers" class="list-group-item">
                         <div class="row">
                             <div class="col-md-4">
-                                <h4>{{model.user.firstName}} {{model.user.lastName}}</h4>
-                                {{model.user.findUserById()}}
-                                {{model.user.following}}
+                                <h4>{{user.firstName}} {{user.lastName}}</h4>
                             </div>
-                            <div class="col-md-2 pull-right">
-                                <a class="btn btn-primary" ng-click="model.followUser(user)">
-                                    <span class="fa fa-plus-circle"></span> Add</a>
+                        </div>
+                    </li>
+                </div>
+                <hr class="colorgraph">
+            </form>
+        </div>
+        <div class="col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
+            <form id="showLists">
+                <h3>Lists</h3>
+                <div class="list-group">
+                    <li ng-repeat="list in model.userMovieLists" class="list-group-item">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h4>{{list.title}}</h4>
+                            </div>
+                            <div class="col-md-1 pull-right">
+                                <span class="badge">
+                                    {{list.movies.length}}
+                                </span>
                             </div>
                         </div>
                     </li>
@@ -96,7 +100,6 @@
                         <div class="col-md-4">
                             <a href="#/user/{{model.user.following}}/profile"><h4>{{user.firstName}} {{user.lastName}}</h4></a>
                             {{model.friendsSearchResults._id}}
-                            <!--<h4>{{user.firstName}} {{user.lastName}}</h4>-->
                         </div>
                         <div class="col-md-2 pull-right">
                             <a class="btn btn-primary" ng-click="model.followUser(user)">
@@ -105,8 +108,6 @@
                     </div>
                 </li>
             </div>
-
-            {{model.friendsSearchResults}}
         </form>
         <hr class="colorgraph">
         <a class="btn btn-danger  btn-block"
