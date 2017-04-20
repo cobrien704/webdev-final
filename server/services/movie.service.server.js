@@ -64,7 +64,8 @@ module.exports = function(app, model) {
         }
 
         return baseURL + apiURL + '?api_key=' + process.env.MOVIEDB_APIKEY + paramsURL;
-      }
+    }
+
     function getCurrentPopularMovies(req, res) {
         var apiURL = '/movie/popular/';
         var params = {
@@ -113,11 +114,17 @@ module.exports = function(app, model) {
             'language': 'en-US'
         };
 
-        var requestURL = createURL(apiURl, params);
+        var requestURL = createURL(apiURl, params) + '&append_to_response=releases';
 
         request(requestURL, function (error, response, body) {
             if (!error && response.statusCode === 200) {
                 var info = JSON.parse(body);
+
+                info.releases.countries.forEach(function (details) {
+                    if (details.iso_3166_1 === 'US') {
+                         info.contentRating = details.certification;
+                    }
+                });
 
                 res.json(info);
             } else {

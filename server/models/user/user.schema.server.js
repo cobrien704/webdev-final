@@ -2,6 +2,7 @@ module.exports= function() {
     var mongoose = require('mongoose');
 
     var UserSchema = mongoose.Schema({
+        accountType: { type: String, enum: ['USER', 'CHILD', 'ADMIN'], required: true },
         firstName: String,
         lastName: String,
         birthday: String,

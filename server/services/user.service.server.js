@@ -44,6 +44,21 @@ module.exports = function(app, model) {
 
         user.password = bcrypt.hashSync(user.password);
 
+        if (user.birthday) {
+            var todayYear = new Date(Date.now()).getFullYear();
+            var birthdayYear = new Date(user.birthday).getFullYear();
+
+            if ((todayYear - birthdayYear) < 13) {
+                user.accountType = 'CHILD';
+            } else {
+                user.accountType = 'USER';
+            }
+        } else if (user.email.includes('@moovies.com')) {
+            user.accountType = 'ADMIN';
+        } else {
+                user.accountType = 'USER';
+        }
+
         userModel
             .createUser(user)
             .then(function (newUser) {

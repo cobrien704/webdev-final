@@ -35,10 +35,32 @@
         init();
 
         function searchMovies(query) {
+            vm.movies = [];
+
             MovieService
                 .searchMovies(query)
                 .then(function (response) {
-                    vm.movies = response.data.results;
+                    var movieIds = [];
+
+                    response.data.results.forEach(function (movie) {
+                        movieIds.push(movie.id);
+                    });
+
+                    movieIds.forEach(function (id) {
+                        MovieService
+                            .lookupMovieById(id)
+                            .then(function (response) {
+                                var movie = response.data;
+
+                                if (vm.user.accountType === 'CHILD') {
+                                    if (movie.contentRating === 'G' || movie.contentRating === 'PG') {
+                                            vm.movies.push(movie);
+                                    }
+                                } else {
+                                    vm.movies = movies;
+                                }
+                            });
+                    });
                 });
         }
 

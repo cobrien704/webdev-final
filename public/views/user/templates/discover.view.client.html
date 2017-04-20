@@ -29,6 +29,7 @@
                        <img src="http://image.tmdb.org/t/p/w154/{{movie.poster_path}}"/>
                     </div>
                     <div class="col-md-9">
+                        <span class="label label-default">{{movie.contentRating}}</span>
                         <h3>
                             <a href="#/user/{{model.user._id}}/movie/{{movie.id}}">
                                 {{movie.title}}
