@@ -54,6 +54,7 @@
 
 /*trying to add padding to tags on movie details*/
 .tags {
+    background: #ed5495;
     border-radius: 2px;
     font-weight: bold;
     padding: 2px 4px;
@@ -61,9 +62,32 @@
 }
 
 .genre-tag {
-    background: #1abc9c;
+    background: #ed5495;
     border-radius: 2px;
     color: #f5f5f5;
-    font-weight: bold;
+    font-weight: normal;
     padding: 2px 4px;
+}
+
+/*trying to change button color*/
+
+.btn-danger {
+    background: #c3556a;
+}
+
+.btn-success {
+    background: #94d571;
+}
+
+/*trying to change link color*/
+a:link {
+    color: #ed5495;
+}
+
+a:visited {
+    color: #c3556a;
+}
+
+.selection {
+    color: #ed5495;
 }

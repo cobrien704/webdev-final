@@ -62,6 +62,11 @@
                     }, 10000);
                 });
         }
+        $("#showFollowing").hide();
+        $("#showFollowingButton").click(function(){
+            $("#showFollowing").toggle();
+        });
+
 
     }
 })();
