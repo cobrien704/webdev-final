@@ -50,6 +50,7 @@
                 .success(function (response) {
                     var activity = {
                         type: 'ADD',
+                        listId: listId,
                         movieId: movie.id
                     };
 

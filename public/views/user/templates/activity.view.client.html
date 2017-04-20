@@ -1,7 +1,5 @@
 <div ng-include src="'views/templates/nav-bar.template.client.html'"></div>
 
-{{model.feed}}
-
 <div class="container-fluid">
     <div class="col-md-offset-1 col-md-10">
         <div class="list-group">
@@ -9,15 +7,19 @@
                 <div ng-switch="feedItem.type">
                     <div ng-switch-when="CREATE">
                         <p>{{feedItem.user.firstName}} created a new list called {{feedItem.movieList.title}}</p>
+                        <p ng-bind="feedItem.dateCreated | date:'h:mma MM/dd/yyyy'">{{feedItem.dateCreated}}</p>
                     </div>
                     <div ng-switch-when="ADD">
-                        <p>{{feedItem.user.firstName}} added a new movie to their list called {{feedItem.movie.title}}</p>
+                        <p>{{feedItem.user.firstName}} added a new movie to their list {{feedItem.movieList.title}} called {{feedItem.movie.title}}</p>
+                        <p ng-bind="feedItem.dateCreated | date:'h:mma MM/dd/yyyy'">{{feedItem.dateCreated}}</p>
                     </div>
                     <div ng-switch-when="DELETE">
-                        <p>{{feedItem.user.firstName}} deleted {{feedItem.movie.title}} from their list</p>
+                        <p>{{feedItem.user.firstName}} deleted {{feedItem.movie.title}} from their list {{feedItem.movieList.title}}</p>
+                        <p ng-bind="feedItem.dateCreated | date:'h:mma MM/dd/yyyy'">{{feedItem.dateCreated}}</p>
                     </div>
                     <div ng-switch-when="FOLLOW">
                         <p>{{feedItem.user.firstName}} started following {{feedItem.followUser.firstName}} {{feedItem.followUser.lastName}}</p>
+                        <p ng-bind="feedItem.dateCreated | date:'h:mma MM/dd/yyyy'">{{feedItem.dateCreated}}</p>
                     </div>
                 </div>
             </a>

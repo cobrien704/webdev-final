@@ -47,25 +47,42 @@
                                         .getMovieListById(feedItem.listId)
                                         .then(function (movieList) {
                                             feedItem.movieList = movieList.data;
+                                            vm.feed.push(feedItem);
+                                            sortByDate(vm.feed);
                                         });
                                 } else if (feedItem.type === 'ADD' || feedItem.type === 'DELETE') {
                                     MovieService
                                         .lookupMovieById(feedItem.movieId)
                                         .then(function (movie) {
                                             feedItem.movie = movie.data;
+
+                                            MovieListService
+                                                .getMovieListById(feedItem.listId)
+                                                .then(function (movieList) {
+                                                    feedItem.movieList = movieList.data;
+                                                    vm.feed.push(feedItem);
+                                                    sortByDate(vm.feed);
+                                                });
                                         });
                                 } else if (feedItem.type === 'FOLLOW') {
                                     UserService
                                         .findUserById(feedItem.followUserId)
                                         .then(function (user) {
                                             feedItem.followUser = user.data;
+                                            vm.feed.push(feedItem);
+                                            sortByDate(vm.feed);
                                         });
                                 }
-
-                                vm.feed.push(feedItem);
-                            })
-
+                            });
                     });
+            });
+        }
+
+        function sortByDate(list) {
+            list.sort(function (a, b) {
+                a = new Date(a.dateCreated);
+                b = new Date(b.dateCreated);
+                return a>b ? -1 : a<b ? 1 : 0;
             });
         }
 

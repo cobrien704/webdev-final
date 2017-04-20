@@ -66,6 +66,7 @@
                 .then(function (response) {
                     var activity = {
                         type: 'DELETE',
+                        listId: listId,
                         movieId: movieId
                     };
 

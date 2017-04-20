@@ -20,7 +20,7 @@ module.exports = function(app, model) {
                         .then(function (user) {
                             user.activity.unshift(addedActivity._id);
 
-                            if (10 <= user.activity.length) {
+                            if (10 < user.activity.length) {
                                 user.activity.pop();
                             }
                             user.save();
