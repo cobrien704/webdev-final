@@ -24,11 +24,6 @@
 
 /*this is the css for the movie details page*/
 
-body {
-    margin-top:60px;
-    font-family: 'Montserrat',sans-serif;
-}
-
 .panel-heading {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -55,9 +50,7 @@ body {
 }
 .panel-title {
     font-weight: 400;
-    color: $white;
 }
-
 
 /*trying to add padding to tags on movie details*/
 .tags {

@@ -1,8 +1,6 @@
 <div ng-include src="'views/templates/nav-bar.template.client.html'"></div>
 
 <div class="container-fluid">
-    <hr class="colorgraph">
-
     <div class="col-md-4 hidden-xs">
         <h4 style="display: inline-block">My Lists</h4>
         <button type="button" class="btn btn-default" id="addFormButton" style="float: right; display: inline-block">
@@ -46,29 +44,16 @@
                         <img src="http://image.tmdb.org/t/p/w154/{{movie.poster_path}}"/>
                     </div>
                     <div class="col-md-9">
-                        <h3>{{movie.title}}</h3>
+                        <h3>
+                            <a href="#/user/{{model.user._id}}/movie/{{movie.id}}">
+                                {{movie.title}}
+                            </a>
+                        </h3>
                         <p>{{movie.overview}}</p>                        
                     </div>
                 </div>
                 <a ng-click="model.removeMovieFromList(selected._id, movie.id)" class="btn btn-danger btn-block">
                     Remove from list
-                </a>
-            </li>
-        </ul>
-
-        <ul class="list-group">
-            <li ng-repeat="movie in model.movies" class="list-group-item">
-                <div class="row">
-                    <div class="col-md-3">
-                        <img src="http://image.tmdb.org/t/p/w154/{{movie.poster_path}}"/>
-                    </div>
-                    <div class="col-md-9">
-                        <h3>{{movie.title}}</h3>
-                        <p>{{movie.overview}}</p>                        
-                    </div>
-                </div>
-                <a ng-click="model.addMovieToList(selected._id, movie)" class="btn btn-success btn-block">
-                    Add to list
                 </a>
             </li>
         </ul>
