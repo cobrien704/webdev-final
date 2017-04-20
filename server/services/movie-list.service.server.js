@@ -5,10 +5,9 @@ module.exports = function(app, model) {
     var userModel = model.userModel;
 
     app.post('/api/user/:userId/movieList', createList);
-    app.get('/api/movieList/:listId', getMovieListById);
     app.get('/api/user/:userId/movieList', getMovieListsForUser);
+    app.get('/api/movieList/:listId', getMovieListById);
     app.delete('/api/movieList/:listId', deleteList);
-
 
     function createList(req, res) {
         var userId = req.params['userId'];
@@ -23,7 +22,7 @@ module.exports = function(app, model) {
                         .then(function (user) {
                             user.movieLists.push(addedList._id);
                             user.save();
-                            res.sendStatus(200);
+                            res.json(addedList);
                         }, function () {
                             res.sendStatus(500);
                         });

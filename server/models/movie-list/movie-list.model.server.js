@@ -9,7 +9,6 @@ module.exports = function() {
         createList: createList,
         getMovieListsForUser: getMovieListsForUser,
         getMovieListById: getMovieListById,
-        addMovieToList: addMovieToList,
         deleteList: deleteList
     };
     return api;
@@ -25,10 +24,6 @@ module.exports = function() {
 
     function getMovieListById(listId) {
         return MovieListModel.findById({ _id: listId });
-    }
-
-    function addMovieToList(listId, movie) {
-
     }
 
     function deleteList(listId) {

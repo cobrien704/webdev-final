@@ -9,6 +9,7 @@ module.exports= function() {
         email: String,
         movieLists: [{type: mongoose.Schema.Types.ObjectId, ref: 'MovieListModel'}],
         following: [{type: mongoose.Schema.Types.ObjectId, ref: 'UserModel'}],
+        activity: [{type: mongoose.Schema.Types.ObjectId, ref: 'ActivityModel'}],
         dateCreated: { type: Date, default: Date.now },
         google: {
             id:    String,

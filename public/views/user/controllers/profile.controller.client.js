@@ -3,7 +3,7 @@
         .module('Mooviews')
         .controller('ProfileController', ProfileController);
 
-    function ProfileController($location, $scope, $routeParams, UserService, MovieListService) {
+    function ProfileController($location, $scope, $routeParams, UserService, ActivityService, MovieListService) {
         var vm = this;
         vm.userId = $routeParams['uid'];
         vm.searchForUsers = searchForUsers;
@@ -42,14 +42,23 @@
             UserService
                 .followUser(vm.userId, followUser._id)
                 .success(function (response) {
-                    var successAlert = $('#successAlert');
-                    successAlert.html("<strong>Success!</strong> You are now following " + followUser.firstName + "!");
-                    successAlert.show();
-                    $('html,body').animate({ scrollTop: 0 }, 'slow');
+                    var activity = {
+                        type: 'FOLLOW',
+                        followUserId: followUser._id
+                    };
 
-                    setTimeout(function(){
-                        $('#successAlert').hide();
-                    }, 10000);
+                    ActivityService
+                        .createActivity(vm.userId, activity)
+                        .then(function (response) {
+                            var successAlert = $('#successAlert');
+                            successAlert.html("<strong>Success!</strong> You are now following " + followUser.firstName + "!");
+                            successAlert.show();
+                            $('html,body').animate({scrollTop: 0}, 'slow');
+
+                            setTimeout(function () {
+                                $('#successAlert').hide();
+                            }, 10000);
+                        });
                 })
                 .error(function (response) {
                     var dangerAlert = $('#dangerAlert');

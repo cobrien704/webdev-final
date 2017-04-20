@@ -1,5 +1,30 @@
 <div ng-include src="'views/templates/nav-bar.template.client.html'"></div>
 
+{{model.feed}}
+
+<div class="container-fluid">
+    <div class="col-md-offset-1 col-md-10">
+        <div class="list-group">
+            <a ng-repeat="feedItem in model.feed" class="list-group-item">
+                <div ng-switch="feedItem.type">
+                    <div ng-switch-when="CREATE">
+                        <p>{{feedItem.user.firstName}} created a new list called {{feedItem.movieList.title}}</p>
+                    </div>
+                    <div ng-switch-when="ADD">
+                        <p>{{feedItem.user.firstName}} added a new movie to their list called {{feedItem.movie.title}}</p>
+                    </div>
+                    <div ng-switch-when="DELETE">
+                        <p>{{feedItem.user.firstName}} deleted {{feedItem.movie.title}} from their list</p>
+                    </div>
+                    <div ng-switch-when="FOLLOW">
+                        <p>{{feedItem.user.firstName}} started following {{feedItem.followUser.firstName}} {{feedItem.followUser.lastName}}</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
 <div ng-repeat="movie in model.popularMovies">
     <div class="popular-movie">
         <h5>{{movie.original_title}}</h5>

@@ -13,8 +13,10 @@ mongoose.connect(connectionString);
 
 var userModel      = require('./user/user.model.server')();
 var movieListModel = require('./movie-list/movie-list.model.server')();
+var activityModel  = require('./activity/activity.model.server')();
 
 module.exports = {
     userModel: userModel,
-    movieListModel: movieListModel
+    movieListModel: movieListModel,
+    activityModel: activityModel
 };

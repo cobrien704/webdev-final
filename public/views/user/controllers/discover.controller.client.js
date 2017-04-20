@@ -3,7 +3,7 @@
         .module('Mooviews')
         .controller('DiscoverController', DiscoverController);
 
-    function DiscoverController($location, $routeParams, UserService, MovieService, MovieListService) {
+    function DiscoverController($location, $routeParams, UserService, ActivityService, MovieService, MovieListService) {
         var vm = this;
         vm.userId = $routeParams['uid'];
         vm.searchMovies = searchMovies;
@@ -48,14 +48,23 @@
             MovieService
                 .addMovieToList(listId, movie)
                 .success(function (response) {
-                    var successAlert = $('#successAlert');
-                    successAlert.html("<strong>Success!</strong> " + movie.title + " has been added");
-                    successAlert.show();
-                    $('html,body').animate({ scrollTop: 0 }, 'slow');
+                    var activity = {
+                        type: 'ADD',
+                        movieId: movie.id
+                    };
 
-                    setTimeout(function(){
-                        $('#successAlert').hide();
-                    }, 10000);
+                    ActivityService
+                        .createActivity(vm.userId, activity)
+                        .then(function (response) {
+                            var successAlert = $('#successAlert');
+                            successAlert.html("<strong>Success!</strong> " + movie.title + " has been added");
+                            successAlert.show();
+                            $('html,body').animate({ scrollTop: 0 }, 'slow');
+
+                            setTimeout(function(){
+                                $('#successAlert').hide();
+                            }, 10000);
+                        });
                 })
                 .error(function (response) {
                     var dangerAlert = $('#dangerAlert');

@@ -3,12 +3,11 @@
         .module('Mooviews')
         .controller('ListsController', ListsController);
 
-    function ListsController($location, $scope, $routeParams, UserService, MovieService, MovieListService) {
+    function ListsController($location, $scope, $routeParams, UserService, ActivityService, MovieService, MovieListService) {
         var vm = this;
         vm.userId = $routeParams['uid'];
         vm.setSelected = setSelected;
         vm.createList = createList;
-        vm.addMovieToList = addMovieToList;
         vm.removeMovieFromList = removeMovieFromList;
         vm.deleteList = deleteList;
 
@@ -61,19 +60,20 @@
                 });
         }
 
-        function addMovieToList(listId, movie) {
-            MovieService
-                .addMovieToList(listId, movie)
-                .then(function (response) {
-                    init();
-                });
-        }
-
         function removeMovieFromList(listId, movieId) {
             MovieService
                 .removeMovieFromList(listId, movieId)
                 .then(function (response) {
-                    init();
+                    var activity = {
+                        type: 'DELETE',
+                        movieId: movieId
+                    };
+
+                    ActivityService
+                        .createActivity(vm.userId, activity)
+                        .then(function (response) {
+                            init();
+                        });
                 });
         }
 
@@ -81,8 +81,19 @@
             MovieListService
                 .createList(vm.userId, list)
                 .then(function (response) {
-                    $("#addForm").hide();
-                    init();
+                    var addedList = response.data;
+
+                    var activity = {
+                        type: 'CREATE',
+                        listId: addedList._id
+                    };
+
+                    ActivityService
+                        .createActivity(vm.userId, activity)
+                        .then(function (response) {
+                            $("#addForm").hide();
+                            init();
+                        });
                 });
         }
 

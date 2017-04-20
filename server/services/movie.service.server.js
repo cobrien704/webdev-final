@@ -26,7 +26,6 @@ module.exports = function(app, model) {
                         list.save();
                         res.sendStatus(200);
                     }
-
                 }, function () {
                     res.sendStatus(500);
                 });
