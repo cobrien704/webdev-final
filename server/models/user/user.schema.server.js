@@ -6,6 +6,7 @@ module.exports= function() {
         password: String,
         firstName: String,
         lastName: String,
+        birthday: String,
         email: String,
         movieLists: [{type: mongoose.Schema.Types.ObjectId, ref: 'MovieListModel'}],
         following: [{type: mongoose.Schema.Types.ObjectId, ref: 'UserModel'}],

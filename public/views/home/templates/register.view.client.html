@@ -29,6 +29,13 @@
                         </div>
                     </div>
                 </div>
+                <div class="input-group date" data-provide="datepicker">
+                    <input ng-model="user.birthday" type="text" name="birthday" id="birthday" class="form-control" placeholder="Birthday: MM/DD/YYY" type="text">
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-th"></span>
+                    </div>
+                </div>
+                <br>
                 <div class="form-group">
                     <input ng-model="user.email"
                            type="email"
@@ -68,7 +75,7 @@
                     </div>
                 </div>
                 <hr class="colorgraph">
-                <div class="row">
+                <div id="register" class="row">
                     <div class="col-xs-12 col-md-6"><a href="#/" class="btn btn-success btn-block btn-lg">Sign In</a></div>
                     <div class="col-xs-12 col-md-6"><a ng-click="model.register(user)" class="btn btn-primary btn-block btn-lg" tabindex="7">Register</a></div>
                 </div>

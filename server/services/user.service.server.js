@@ -12,6 +12,7 @@ module.exports = function(app, model) {
         userModel
             .createUser(user)
             .then(function (user) {
+                console.log(user)
                 if (user) {
                     res.sendStatus(201);
                 } else {

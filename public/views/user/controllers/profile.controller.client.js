@@ -76,6 +76,9 @@
             $("#showFollowing").toggle();
         });
 
+        function findUserById(id) {
+            return $http.get('/api/user?id=' + id);
+        }
 
     }
 })();

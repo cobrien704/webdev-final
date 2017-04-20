@@ -80,6 +80,14 @@
 }
 
 /*trying to change link color*/
+#register a:link {
+    color: white;
+}
+
+#register a:visited {
+    color: white;
+}
+
 a:link {
     color: #ed5495;
 }
@@ -91,3 +99,4 @@ a:visited {
 .selection {
     color: #ed5495;
 }
+
