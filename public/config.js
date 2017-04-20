@@ -24,5 +24,10 @@
                 controller: 'ListsController',
                 controllerAs: 'model'
             })
+            .when('/user/:uid/movie/:mid', {
+                templateUrl: 'views/user/templates/movie-details.view.client.html',
+                controller: 'MovieDetailsController',
+                controllerAs: 'model'
+            })
     }
 })();
