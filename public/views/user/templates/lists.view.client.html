@@ -28,8 +28,6 @@
             <hr class="colorgraph">
         </form>
 
-        {{selected._id || "none"}}
-
         <div class="list-group">
             <a ng-repeat="list in model.movieLists" ng-click="model.setSelected(list)" ng-class="{active:selected==list}" class="list-group-item">
                 {{list.title}}
@@ -41,19 +39,6 @@
     </div>
 
     <div class="col-md-8">
-        <form role="form">
-            <div class="row">
-                <div class="form-group">
-                    <div class="input-group">
-                        <input class="form-control" type="text" ng-model="searchValue" name="search" placeholder="Enter movie name" required/>
-                        <span class="input-group-btn">
-                            <button class="btn btn-success" type="submit" ng-click="model.searchMovies(searchValue)"><span class="glyphicon glyphicon-search" aria-hidden="true"><span style="margin-left:10px;">Search</span></button>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </form>
-
         <ul class="list-group">
             <li ng-repeat="movie in model.selectedMovieListMovies" class="list-group-item">
                 <div class="row">

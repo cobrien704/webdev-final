@@ -1,0 +1,51 @@
+<div ng-include src="'views/templates/nav-bar.template.client.html'"></div>
+
+<div class="container-fluid">
+    <hr class="colorgraph">
+
+    <div id="successAlert" class="alert alert-success" role="alert"></div>
+    <div id="dangerAlert" class="alert alert-danger" role="alert"></div>
+
+    <div class="col-md-12">
+        <form role="form">
+            <div class="row">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input class="form-control" type="text" ng-model="searchValue" name="search" placeholder="Enter movie name" required/>
+                        <span class="input-group-btn">
+                            <button class="btn btn-success" type="submit" ng-click="model.searchMovies(searchValue)">
+                                <span class="glyphicon glyphicon-search" aria-hidden="true">
+                                    <span style="margin-left:10px;">Search</span>
+                                </span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <ul class="list-group">
+            <li ng-repeat="movie in model.movies" class="list-group-item">
+                <div class="row">
+                    <div class="col-md-3">
+                       <img src="http://image.tmdb.org/t/p/w154/{{movie.poster_path}}"/>
+                    </div>
+                    <div class="col-md-9">
+                        <h3>{{movie.title}}</h3>
+                        <p>{{movie.overview}}</p>                        
+                    </div>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <select class="form-control" id="selectListForm-{{movie.id}}">
+                        <option ng-repeat="list in model.movieLists" value="{{list._id}}">{{list.title}}</option>
+                    </select>
+                    <br>
+                    <a type="submit" ng-click="model.addMovieToList(movie)" class="btn btn-success btn-block">
+                        Add to list
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

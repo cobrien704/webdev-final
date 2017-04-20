@@ -18,6 +18,9 @@
     color: #ed5495 !important;
 }
 
+.hidden {
+    display: none;
+}
 
 /*this is the css for the movie details page*/
 
@@ -55,6 +58,7 @@ body {
     color: $white;
 }
 
+
 /*trying to add padding to tags on movie details*/
 .tags {
     border-radius: 2px;
@@ -62,3 +66,4 @@ body {
     padding: 2px 4px;
     margin: 0 2px;
 }
+

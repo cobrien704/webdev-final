@@ -7,7 +7,6 @@
         var vm = this;
         vm.userId = $routeParams['uid'];
         vm.setSelected = setSelected;
-        vm.searchMovies = searchMovies;
         vm.createList = createList;
         vm.addMovieToList = addMovieToList;
         vm.removeMovieFromList = removeMovieFromList;
@@ -62,19 +61,11 @@
                 });
         }
 
-        function searchMovies(query) {
-            MovieService
-                .searchMovies(query)
-                .then(function (response) {
-                    vm.movies = response.data.results;
-                });
-        }
-
         function addMovieToList(listId, movie) {
             MovieService
                 .addMovieToList(listId, movie)
                 .then(function (response) {
-                   init();
+                    init();
                 });
         }
 
