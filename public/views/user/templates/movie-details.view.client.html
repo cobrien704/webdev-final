@@ -2,118 +2,124 @@
 
     <hr class="colorgraph">
 
+
+
     <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 
 
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
+
+            <div class="col-md-5">
+                <!-- poster goes here -->
+                <div class="tab-featured-image">
+                    <div class="tab-content">
+                        <div class="tab-pane  in active" id="tab1">
+                            <img src="http://image.tmdb.org/t/p/w500/{{model.movie.poster_path}}" alt="tab1" class="img img-responsive">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-7">
                 <!-- begin panel group -->
                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
                     <!-- panel 1 -->
                     <div class="panel panel-default">
-                        <!--wrap panel heading in span to trigger image change as well as collapse -->
-                        <span class="side-tab" data-target="#tab1" data-toggle="tab" role="tab" aria-expanded="false">
-                        <div class="panel-heading" role="tab" id="headingOne"data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            <h4 class="panel-title">movie.title</h4>
-                        </div>
-                    </span>
+                        <span class="side-tab" data-target="#tab1" data-toggle="tab" role="tab" aria-expanded="true">
+                            <div class="panel-heading" role="tab" id="headingOne"data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <h3>{{model.movie.title}}</h3>
+                            </div>
+                        </span>
 
                         <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                             <div class="panel-body">
                                 <!-- Tab content goes here -->
-                                movie.overview
+                                &nbsp;&nbsp;&nbsp;&nbsp;{{model.movie.overview}}
                             </div>
                         </div>
                     </div>
                     <!-- / panel 1 -->
 
-                    <!-- panel 2 -->
+                    <!-- panel 1.1 -->
                     <div class="panel panel-default">
-                        <!--wrap panel heading in span to trigger image change as well as collapse -->
-                        <span class="side-tab" data-target="#tab2" data-toggle="tab" role="tab" aria-expanded="false">
-                        <div class="panel-heading" role="tab" id="headingTwo" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            <h4 class="panel-title collapsed">TAB 2</h4>
-                        </div>
-                    </span>
+                        <span class="side-tab" data-target="#tab1" data-toggle="tab" role="tab" aria-expanded="true">
+                             <div class="panel-heading" role="tab" id="headingOneOne"data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <h4 class="panel-title">Tagline</h4>
+                            </div>
+                        </span>
 
-                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                        <div id="collapseOneOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                             <div class="panel-body">
                                 <!-- Tab content goes here -->
-                                tab 2 content
+                                "{{model.movie.tagline}}"
                             </div>
                         </div>
+                    </div>
+                    <!-- / panel 1.1 -->
+
+                    <!-- panel 1.2 -->
+                    <div class="panel panel-default">
+                        <span class="side-tab" data-target="#tab1" data-toggle="tab" role="tab" aria-expanded="true">
+                            <div class="panel-heading" role="tab" id="headingOneTwo"data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <h4 class="panel-title">Production Companies</h4>
+                            </div>
+                        </span>
+
+                        <div id="collapseOneTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body">
+                                <!-- Tab content goes here -->
+                                <p ng-repeat="company in model.movie.production_companies">- {{company.name}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- / panel 1.2 -->
+
+                    <!-- panel 2 -->
+                    <div class="panel panel-default">
+                        <span class="side-tab" data-target="#tab2" data-toggle="tab" role="tab" aria-expanded="false">
+                        <div class="panel-heading" role="tab" id="headingTwo" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <h4 class="panel-title collapsed">Release Date: {{model.movie.release_date}}</h4>
+                        </div>
+                    </span>
                     </div>
                     <!-- / panel 2 -->
 
                     <!-- panel 2.1 -->
                     <div class="panel panel-default">
-                        <!--wrap panel heading in span to trigger image change as well as collapse -->
                         <span class="side-tab" data-target="#tab2" data-toggle="tab" role="tab" aria-expanded="false">
-                        <div class="panel-heading" role="tab" id="headingTwo" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            <h4 class="panel-title collapsed">TAB 2.1</h4>
+                        <div class="panel-heading" role="tab" id="headingTwoOne" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <h4 class="panel-title collapsed">Length: {{model.movie.runtime}} minutes</h4>
                         </div>
                     </span>
-
-                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                            <div class="panel-body">
-                                <!-- Tab content goes here -->
-                                tab 2 content
-                            </div>
-                        </div>
                     </div>
                     <!-- / panel 2.1 -->
 
                     <!-- panel 2.2 -->
                     <div class="panel panel-default">
-                        <!--wrap panel heading in span to trigger image change as well as collapse -->
                         <span class="side-tab" data-target="#tab2" data-toggle="tab" role="tab" aria-expanded="false">
-                        <div class="panel-heading" role="tab" id="headingTwo" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            <h4 class="panel-title collapsed">TAB 2.2</h4>
+                        <div class="panel-heading" role="tab" id="headingTwoTwo" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <h4 class="panel-title collapsed">Genre:
+                                <span class="label label-default" ng-repeat="genres in model.movie.genres">{{genres.name}}</span>
+                                <br>
+                            </h4>
                         </div>
                     </span>
-
-                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                            <div class="panel-body">
-                                <!-- Tab content goes here -->
-                                tab 2 content
-                            </div>
-                        </div>
                     </div>
                     <!-- / panel 2.2 -->
 
                     <!--  panel 3 -->
                     <div class="panel panel-default">
-                        <!--wrap panel heading in span to trigger image change as well as collapse -->
                         <span class="side-tab" data-target="#tab3" data-toggle="tab" role="tab" aria-expanded="false">
                         <div class="panel-heading" role="tab" id="headingThree"  class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            <h4 class="panel-title">TAB 3 </h4>
+                            <h4 class="panel-title">Status: {{model.movie.status}} </h4>
                         </div>
                     </span>
-
-                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                            <div class="panel-body">
-                                <!-- tab content goes here -->
-                                tab 3 content
-                            </div>
-                        </div>
                     </div>
+
                 </div> <!-- / panel-group -->
-
             </div> <!-- /col-md-4 -->
-
-            <div class="col-md-8">
-                            <!-- content goes here -->
-                            <div class="tab-featured-image">
-                                <div class="tab-content">
-                                    <div class="tab-pane  in active" id="tab1">
-                                        <img src="https://ununsplash.imgix.net/photo-1417024321782-1375735f8987?dpr=2&fit=crop&fm=jpg&h=650&q=75&w=950" alt="tab1" class="img img-responsive">
-                                        <!--<img src="http://image.tmdb.org/t/p/w154/{{movie.poster_path}}"/>-->
-                                    </div>
-                                </div>
-                            </div>
-            </div> <!-- / .col-md-8 -->
         </div> <!--/ .row -->
     </div> <!-- end sidetab container -->
     </html>
