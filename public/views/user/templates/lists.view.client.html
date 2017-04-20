@@ -1,5 +1,6 @@
-<div class="container-fluid">
+<div ng-include src="'views/templates/nav-bar.template.client.html'"></div>
 
+<div class="container-fluid">
     <hr class="colorgraph">
 
     <div class="col-md-4 hidden-xs">
@@ -17,7 +18,6 @@
             </div>
             <div class="form-group">
                 <textarea ng-model="list.description"
-                          type="text"
                           id="description"
                           class="form-control"
                           placeholder="Description"></textarea>

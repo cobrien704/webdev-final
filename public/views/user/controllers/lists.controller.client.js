@@ -3,7 +3,7 @@
         .module('Mooviews')
         .controller('ListsController', ListsController);
 
-    function ListsController($location, $scope, $routeParams, MovieService, MovieListService) {
+    function ListsController($location, $scope, $routeParams, UserService, MovieService, MovieListService) {
         var vm = this;
         vm.userId = $routeParams['uid'];
         vm.setSelected = setSelected;
@@ -19,6 +19,19 @@
 
         function init() {
             $('#addForm').trigger('reset');
+
+            UserService
+                .findUserById(vm.userId)
+                .then(function(response) {
+                    var user = response.data;
+
+                    if (user) {
+                        vm.user = user
+                    } else {
+                        vm.user = 'ERROR';
+                        $location.url('/');
+                    }
+                });
 
             MovieListService
                 .getMovieListsForUser(vm.userId)

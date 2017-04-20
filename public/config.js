@@ -14,13 +14,13 @@
                 controller: 'RegisterController',
                 controllerAs: 'model'
             })
-            .when('/home/:uid', {
-                templateUrl: 'views/home/templates/home.view.client.html',
-                controller: 'HomeController',
+            .when('/user/:uid/activity', {
+                templateUrl: 'views/user/templates/activity.view.client.html',
+                controller: 'ActivityController',
                 controllerAs: 'model'
             })
             .when('/user/:uid/lists', {
-                templateUrl: 'views/user/templates/movie-lists.view.client.html',
+                templateUrl: 'views/user/templates/lists.view.client.html',
                 controller: 'ListsController',
                 controllerAs: 'model'
             })

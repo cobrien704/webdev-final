@@ -1,9 +1,9 @@
 (function() {
     angular
         .module('Mooviews')
-        .controller('HomeController', HomeController);
+        .controller('ActivityController', ActivityController);
 
-    function HomeController($routeParams, UserService, MovieService) {
+    function ActivityController($routeParams, UserService, MovieService) {
         var vm = this;
         vm.getCurrentPopularMovies = getCurrentPopularMovies;
 
@@ -20,6 +20,7 @@
                         vm.user = user
                     } else {
                         vm.user = 'ERROR';
+                        $location.url('/');
                     }
             });
         }
