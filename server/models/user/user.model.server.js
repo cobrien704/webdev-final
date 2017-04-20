@@ -9,7 +9,9 @@ module.exports = function() {
         createUser: createUser,
         findUserById: findUserById,
         findUserByEmail: findUserByEmail,
-        findUsersByQuery: findUsersByQuery
+        findUsersByQuery: findUsersByQuery,
+        findUserByCredentials: findUserByCredentials,
+        findUserByGoogleId: findUserByGoogleId
     };
 
     return api;
@@ -32,5 +34,13 @@ module.exports = function() {
                { lastName: {"$regex": query, "$options": "i" }},
                { email: {"$regex": query, "$options": "i" }}]});
 
+    }
+
+    function findUserByCredentials(email, password) {
+        return UserModel.findOne({ email: email, password: password });
+    }
+
+    function findUserByGoogleId(googleId) {
+        return UserModel.findOne({'google.id': googleId});
     }
 };

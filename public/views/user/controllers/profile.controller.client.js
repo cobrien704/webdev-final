@@ -3,11 +3,12 @@
         .module('Mooviews')
         .controller('ProfileController', ProfileController);
 
-    function ProfileController($location, $scope, $routeParams, UserService, ActivityService, MovieListService) {
+    function ProfileController($location, $scope, $rootScope, $routeParams, UserService, ActivityService, MovieListService) {
         var vm = this;
         vm.userId = $routeParams['uid'];
         vm.searchForUsers = searchForUsers;
         vm.followUser = followUser;
+        vm.logout = logout;
 
 
         function init() {
@@ -29,6 +30,14 @@
         }
         init();
 
+        function logout(user) {
+            UserService
+                .logout(user)
+                .then(function (response) {
+                    $rootScope.currentUser = null;
+                    $location.url('/');
+                });
+        }
 
         function searchForUsers(query) {
             UserService
@@ -75,10 +84,5 @@
         $("#showFollowingButton").click(function(){
             $("#showFollowing").toggle();
         });
-
-        function findUserById(id) {
-            return $http.get('/api/user?id=' + id);
-        }
-
     }
 })();

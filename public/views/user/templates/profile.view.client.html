@@ -22,30 +22,6 @@
                     </div>
                     <br>
                     <br>
-                    <div class="col-xs-12 col-sm-4 text-center">
-                        <figure>
-                            <img src="http://www.localcrimenews.com/wp-content/uploads/2013/07/default-user-icon-profile.png" alt="" class="img-circle img-responsive">
-                            <figcaption class="ratings">
-                                <p>Ratings
-                                    <a href="#">
-                                        <span class="fa fa-star"></span>
-                                    </a>
-                                    <a href="#">
-                                        <span class="fa fa-star"></span>
-                                    </a>
-                                    <a href="#">
-                                        <span class="fa fa-star"></span>
-                                    </a>
-                                    <a href="#">
-                                        <span class="fa fa-star"></span>
-                                    </a>
-                                    <a href="#">
-                                        <span class="fa fa-star-o"></span>
-                                    </a>
-                                </p>
-                            </figcaption>
-                        </figure>
-                    </div>
                 </div>
                 <div class="col-xs-12 divider text-center">
                     <div class="col-xs-12 col-sm-4 emphasis">
@@ -130,5 +106,10 @@
 
             {{model.friendsSearchResults}}
         </form>
+        <hr class="colorgraph">
+        <a class="btn btn-danger  btn-block"
+           ng-click="model.logout(model.user)">
+            Logout
+        </a>
     </div>
 </div>

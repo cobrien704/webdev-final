@@ -9,10 +9,10 @@
 
         function login(user) {
             UserService
-                .findUserByEmail(user.email)
+                .login(user)
                 .then(function(response) {
                     var user = response.data;
-
+                    $rootScope.currentUser = user;
                     if (user) {
                         $location.url('/user/' + user._id + '/activity');
                     } else {

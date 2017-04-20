@@ -17,27 +17,47 @@
             .when('/user/:uid/activity', {
                 templateUrl: 'views/user/templates/activity.view.client.html',
                 controller: 'ActivityController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: { loggedin: checkLoggedin }
             })
             .when('/user/:uid/discover', {
                 templateUrl: 'views/user/templates/discover.view.client.html',
                 controller: 'DiscoverController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: { loggedin: checkLoggedin }
             })
             .when('/user/:uid/lists', {
                 templateUrl: 'views/user/templates/lists.view.client.html',
                 controller: 'ListsController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: { loggedin: checkLoggedin }
             })
             .when('/user/:uid/movie/:mid', {
                 templateUrl: 'views/user/templates/movie-details.view.client.html',
                 controller: 'MovieDetailsController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: { loggedin: checkLoggedin }
             })
             .when('/user/:uid/profile', {
                 templateUrl: 'views/user/templates/profile.view.client.html',
                 controller: 'ProfileController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: { loggedin: checkLoggedin }
             })
     }
+
+    var checkLoggedin = function($q, $timeout, $http, $location, $rootScope) {
+        var deferred = $q.defer();
+        $http.get('/api/loggedin').success(function(user) {
+            $rootScope.errorMessage = null;
+            if (user !== '0') {
+                $rootScope.currentUser = user;
+                deferred.resolve();
+            } else {
+                deferred.reject();
+                $location.url('/');
+            }
+        });
+        return deferred.promise;
+    };
 })();
