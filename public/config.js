@@ -34,5 +34,10 @@
                 controller: 'MovieDetailsController',
                 controllerAs: 'model'
             })
+            .when('/user/:uid/profile', {
+                templateUrl: 'views/user/templates/profile.view.client.html',
+                controller: 'ProfileController',
+                controllerAs: 'model'
+            })
     }
 })();
