@@ -54,7 +54,22 @@
             </div>
         </form>
 
-        {{model.selectedMovieListMovies.movies}}
+        <ul class="list-group">
+            <li ng-repeat="movie in model.selectedMovieListMovies" class="list-group-item">
+                <div class="row">
+                    <div class="col-md-3">
+                        <img src="http://image.tmdb.org/t/p/w154/{{movie.poster_path}}"/>
+                    </div>
+                    <div class="col-md-9">
+                        <h3>{{movie.title}}</h3>
+                        <p>{{movie.overview}}</p>                        
+                    </div>
+                </div>
+                <a ng-click="model.removeMovieFromList(selected._id, movie.id)" class="btn btn-danger btn-block">
+                    Remove from list
+                </a>
+            </li>
+        </ul>
 
         <ul class="list-group">
             <li ng-repeat="movie in model.movies" class="list-group-item">

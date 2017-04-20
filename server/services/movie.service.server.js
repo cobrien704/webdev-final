@@ -6,6 +6,7 @@ module.exports = function(app, model) {
     var baseURL = 'https://api.themoviedb.org/3';
 
     app.post('/api/movie/:listId', addMovieToList);
+    app.delete('/api/movie/:listId', removeMovieFromList);
     app.get('/api/movie/getCurrentPopularMovies', getCurrentPopularMovies);
     app.get('/api/movie/search', searchMovies);
     app.get('/api/movie/:movieId', lookupMovieById);
@@ -26,6 +27,26 @@ module.exports = function(app, model) {
                 });
         } else {
             res.sendStatus(404)
+        }
+    }
+
+    function removeMovieFromList(req, res) {
+        var listId = req.params['listId'];
+        var movieId = req.body;
+
+        if (movieId) {
+            movieListModel
+                .getMovieListById(listId)
+                .then(function (list) {
+                    var index = list.movies.indexOf(movieId);
+                    list.movies.splice(index, 1);
+                    list.save();
+                    res.sendStatus(200);
+                }, function() {
+                    res.sendStatus(500);
+                });
+        } else {
+            res.sendStatus(404);
         }
     }
 

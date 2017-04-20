@@ -10,6 +10,7 @@
         vm.searchMovies = searchMovies;
         vm.createList = createList;
         vm.addMovieToList = addMovieToList;
+        vm.removeMovieFromList = removeMovieFromList;
         vm.deleteList = deleteList;
 
         $("#addForm").hide();
@@ -47,7 +48,17 @@
             MovieListService
                 .getMovieListById(list._id)
                 .success(function (data) {
-                    vm.selectedMovieListMovies = data;
+                    var movieData = [];
+
+                    data.movies.forEach(function (movieId) {
+                        MovieService
+                            .lookupMovieById(movieId)
+                            .then(function (movie) {
+                               movieData.push(movie.data);
+                            });
+                    });
+
+                    vm.selectedMovieListMovies = movieData;
                 });
         }
 
@@ -64,6 +75,14 @@
                 .addMovieToList(listId, movie)
                 .then(function (response) {
                    init();
+                });
+        }
+
+        function removeMovieFromList(listId, movieId) {
+            MovieService
+                .removeMovieFromList(listId, movieId)
+                .then(function (response) {
+                    init();
                 });
         }
 

@@ -7,6 +7,7 @@
 
         var api = {
             'addMovieToList': addMovieToList,
+            'removeMovieFromList': removeMovieFromList,
             'getCurrentPopularMovies': getCurrentPopularMovies,
             'searchMovies': searchMovies,
             'lookupMovieById': lookupMovieById
@@ -16,6 +17,10 @@
 
         function addMovieToList(listId, movie) {
             return $http.post('/api/movie/' + listId, movie);
+        }
+
+        function removeMovieFromList(listId, movieId) {
+            return $http.delete('/api/movie/' + listId, movieId);
         }
 
         function getCurrentPopularMovies() {
