@@ -12,14 +12,14 @@
         function login(user) {
             UserService
                 .login(user)
-                .success(function(response) {
+                .then(function(response) {
                     var user = response.data;
 
                     $rootScope.currentUser = user;
                     if (user) {
                         $location.url('/user/' + user._id + '/activity');
                     }
-                }).error(function() {
+                }, function() {
                     var dangerAlert = $('#dangerAlert');
                     dangerAlert.html("<strong>Error!</strong> Invalid credentials!");
                     dangerAlert.show();
