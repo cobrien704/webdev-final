@@ -1,9 +1,29 @@
 <div ng-include src="'views/templates/nav-bar.template.client.html'"></div>
 
-{{model.users}}
 
 <div class="container-fluid">
     <div id="successAlert" class="alert alert-success" role="alert"></div>
     <div id="dangerAlert" class="alert alert-danger" role="alert"></div>
 
+</div>
+
+<div class="col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
+    <hr class="colorgraph">
+    <form id="showFollowing">
+        <h3><center>Mooviews Users</center></h3>
+        <div class="list-group">
+            <li ng-repeat="user in model.users" class="list-group-item">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h4>{{user.firstName}} {{user.lastName}}</h4>
+                        <h5>{{user.email}}</h5>
+                    </div>
+                    <div style="padding-top: 17px" class="col-md-2 pull-right">
+                        <a class="btn btn-danger" ng-click="model.deleteUser(user._id)">Remove</a>
+                    </div>
+                </div>
+            </li>
+        </div>
+        <hr class="colorgraph">
+    </form>
 </div>
