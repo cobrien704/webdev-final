@@ -37,51 +37,52 @@
                     .findUserById(followingId)
                     .then(function (response) {
                         vm.user.activity = vm.user.activity.concat(response.data.activity);
-                    })});
-
-            vm.user.activity.forEach(function (activityId) {
-                ActivityService
-                    .getActivityById(activityId)
-                    .then(function (activity) {
-                        var feedItem = activity.data;
-                        UserService
-                            .findUserById(feedItem._user)
-                            .then(function (user) {
-                                feedItem.user = user.data;
-
-                                if (feedItem.type === 'CREATE') {
-                                    MovieListService
-                                        .getMovieListById(feedItem.listId)
-                                        .then(function (movieList) {
-                                            feedItem.movieList = movieList.data;
-                                            vm.feed.push(feedItem);
-                                            sortByDate(vm.feed);
-                                        });
-                                } else if (feedItem.type === 'ADD' || feedItem.type === 'DELETE') {
-                                    MovieService
-                                        .lookupMovieById(feedItem.movieId)
-                                        .then(function (movie) {
-                                            feedItem.movie = movie.data;
-
-                                            MovieListService
-                                                .getMovieListById(feedItem.listId)
-                                                .then(function (movieList) {
-                                                    feedItem.movieList = movieList.data;
-                                                    vm.feed.push(feedItem);
-                                                    sortByDate(vm.feed);
-                                                });
-                                        });
-                                } else if (feedItem.type === 'FOLLOW') {
-
+                    })
+                    .then(function (response) {
+                        vm.user.activity.forEach(function (activityId) {
+                            ActivityService
+                                .getActivityById(activityId)
+                                .then(function (activity) {
+                                    var feedItem = activity.data;
                                     UserService
-                                        .findUserById(feedItem.followUserId)
+                                        .findUserById(feedItem._user)
                                         .then(function (user) {
-                                            feedItem.followUser = user.data;
-                                            vm.feed.push(feedItem);
-                                            sortByDate(vm.feed);
+                                            feedItem.user = user.data;
+
+                                            if (feedItem.type === 'CREATE') {
+                                                MovieListService
+                                                    .getMovieListById(feedItem.listId)
+                                                    .then(function (movieList) {
+                                                        feedItem.movieList = movieList.data;
+                                                        vm.feed.push(feedItem);
+                                                        sortByDate(vm.feed);
+                                                    });
+                                            } else if (feedItem.type === 'ADD' || feedItem.type === 'DELETE') {
+                                                MovieService
+                                                    .lookupMovieById(feedItem.movieId)
+                                                    .then(function (movie) {
+                                                        feedItem.movie = movie.data;
+
+                                                        MovieListService
+                                                            .getMovieListById(feedItem.listId)
+                                                            .then(function (movieList) {
+                                                                feedItem.movieList = movieList.data;
+                                                                vm.feed.push(feedItem);
+                                                                sortByDate(vm.feed);
+                                                            });
+                                                    });
+                                            } else if (feedItem.type === 'FOLLOW') {
+                                                UserService
+                                                    .findUserById(feedItem.followUserId)
+                                                    .then(function (user) {
+                                                        feedItem.followUser = user.data;
+                                                        vm.feed.push(feedItem);
+                                                        sortByDate(vm.feed);
+                                                    });
+                                            }
                                         });
-                                }
-                            });
+                                });
+                        });
                     });
             });
         }
