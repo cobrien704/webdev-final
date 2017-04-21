@@ -32,7 +32,7 @@
         function generateFeed() {
             vm.feed = [];
 
-            vm.user.following.forEach(function (followingId) {
+            vm.user.following.every(function (followingId) {
                 UserService
                     .findUserById(followingId)
                     .then(function (response) {
@@ -82,6 +82,7 @@
                                             }
                                         });
                                 });
+                            return false;
                         });
                     });
             });
