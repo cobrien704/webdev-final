@@ -14,19 +14,19 @@
             <div ng-repeat="feedItem in model.feed" class="list-group-item">
                 <div id="feed" ng-switch="feedItem.type">
                     <div ng-switch-when="CREATE">
-                        <p><a href="#/user/{{feedItem.user._id}}/profile">{{feedItem.user.firstName}}</a> created a new list called <a href="#/user/{{feedItem.user._id}}/lists">“{{feedItem.movieList.title}}”</a></p>
+                        <p><a href="">{{feedItem.user.firstName}}</a> created a new list called <a href="#/user/{{model.user._id}}/lists/{{feedItem.user._id}}">“{{feedItem.movieList.title}}”</a></p>
                         <p ng-bind="feedItem.dateCreated | date:'h:mma MM/dd/yyyy'">{{feedItem.dateCreated}}</p>
                     </div>
                     <div ng-switch-when="ADD">
-                        <p><a href="#/user/{{feedItem.user._id}}/profile">{{feedItem.user.firstName}}</a> added a new movie to their list <a href="#/user/{{feedItem.user._id}}/lists">“{{feedItem.movieList.title}}”</a> called <a href="#/user/{{model.user._id}}/movie/{{feedItem.movie.id}}">“{{feedItem.movie.title}}”</a></p>
+                        <p><a href="#/user/{{feedItem.user._id}}/profile">{{feedItem.user.firstName}}</a> added a new movie to their list <a href="#/user/{{model.user._id}}/lists/{{feedItem.user._id}}">“{{feedItem.movieList.title}}”</a> called <a href="#/user/{{model.user._id}}/movie/{{feedItem.movie.id}}">“{{feedItem.movie.title}}”</a></p>
                         <p ng-bind="feedItem.dateCreated | date:'h:mma MM/dd/yyyy'">{{feedItem.dateCreated}}</p>
                     </div>
                     <div ng-switch-when="DELETE">
-                        <p><a href="#/user/{{feedItem.user._id}}/profile">{{feedItem.user.firstName}}</a> deleted <a href="#/user/{{feedItem.user._id}}/movie/{{model.movie._mid}}">“{{feedItem.movie.title}}”</a> from their list <a href="#/user/{{model.user._id}}/lists">“{{feedItem.movieList.title}}”</a></p>
+                        <p><a href="#/user/{{feedItem.user._id}}/profile">{{feedItem.user.firstName}}</a> deleted <a href="#/user/{{model.user._id}}/movie/{{feedItem.movie.id}}">“{{feedItem.movie.title}}”</a> from their list <a href="#/user/{{model.user._id}}/lists/{{feedItem.user._id}}">“{{feedItem.movieList.title}}”</a></p>
                         <p ng-bind="feedItem.dateCreated | date:'h:mma MM/dd/yyyy'">{{feedItem.dateCreated}}</p>
                     </div>
                     <div ng-switch-when="FOLLOW">
-                        <p><a href="#/user/{{feedItem.user._id}}/profile">{{feedItem.user.firstName}}</a> started following <a href="#/user/{{feedItem.user._id}}/profile">{{feedItem.followUser.firstName}} {{feedItem.followUser.lastName}}</a></p>
+                        <p><a href="">{{feedItem.user.firstName}}</a> started following <a href="">{{feedItem.followUser.firstName}} {{feedItem.followUser.lastName}}</a></p>
                         <p ng-bind="feedItem.dateCreated | date:'h:mma MM/dd/yyyy'">{{feedItem.dateCreated}}</p>
                     </div>
                 </div>
