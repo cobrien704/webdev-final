@@ -50,6 +50,12 @@
                 controllerAs: 'model',
                 resolve: { loggedin: checkLoggedin }
             })
+            .when('/user/:uid/admin', {
+                templateUrl: 'views/user/templates/admin.view.client.html',
+                controller: 'AdminController',
+                controllerAs: 'model',
+                resolve: { loggedin: checkLoggedin }
+            })
     }
 
     var checkLoggedin = function($q, $timeout, $http, $location, $rootScope) {

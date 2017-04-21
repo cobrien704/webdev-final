@@ -26,6 +26,8 @@ module.exports = function(app, model) {
     app.post('/api/user', createUser);
     app.get('/api/user', findUser);
     app.post('/api/:uid/follow/:fid', followUser);
+    app.get('/api/user/all', findAllUsers)
+    app.delete('/api/user/:uid', deleteUser);
 
     app.post ('/api/login', passport.authenticate('local'), login);
     app.get ('/api/loggedin', loggedin);
@@ -53,10 +55,10 @@ module.exports = function(app, model) {
             } else {
                 user.accountType = 'USER';
             }
-        } else if (user.email.includes('@moovies.com')) {
+        } else if (user.email.includes('@mooviews.com')) {
             user.accountType = 'ADMIN';
         } else {
-                user.accountType = 'USER';
+            user.accountType = 'USER';
         }
 
         userModel
@@ -165,6 +167,28 @@ module.exports = function(app, model) {
         } else {
             res.sendStatus(404);
         }
+    }
+
+    function findAllUsers(req, res) {
+        userModel
+            .findAllUsers()
+            .then(function (users) {
+                res.json(users);
+            }, function () {
+                res.sendStatus(400);
+            });
+    }
+
+    function deleteUser(req, res) {
+        var userId = req.params['uid'];
+
+        userModel
+            .deleteUser(userId)
+            .then(function() {
+                res.sendStatus(200);
+            }, function () {
+                res.sendStatus(500);
+            });
     }
 
     function serializeUser(user, done) {

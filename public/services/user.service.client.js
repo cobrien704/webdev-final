@@ -13,7 +13,9 @@
             'findUserByEmail' : findUserByEmail,
             'findUserById'    : findUserById,
             'findUserByQuery' : findUserByQuery,
-            'followUser'      : followUser
+            'findAllUsers'    : findAllUsers,
+            'followUser'      : followUser,
+            'deleteUser'      : deleteUser
         };
         return api;
 
@@ -45,8 +47,16 @@
             return $http.get('/api/user?query=' + query);
         }
 
+        function findAllUsers() {
+            return $http.get('/api/user/all');
+        }
+
         function followUser(userId, followUserId) {
             return $http.post('/api/'+ userId + '/follow/' + followUserId);
+        }
+
+        function deleteUser(userId) {
+            return $http.delete('/api/user/' + userId);
         }
     }
 })();

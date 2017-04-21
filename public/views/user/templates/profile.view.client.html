@@ -19,6 +19,8 @@
                         <p ng-if="model.user.favGenre"><strong>Favorite Genre: </strong>
                             <span class="genre-tag">{{model.user.favGenre}}</span>
                         </p>
+                        <p ng-if="model.user.accountType"><strong>User Type: </strong>{{model.user.accountType}}</span>
+                        </p>
                     </div>
                     <br>
                     <br>
@@ -101,7 +103,7 @@
                 <li ng-repeat="user in model.friendsSearchResults" class="list-group-item">
                     <div class="row">
                         <div class="col-md-4">
-                            <a href="#/user/{{model.user.following}}/profile"><h4>{{user.firstName}} {{user.lastName}}</h4></a>
+                            <a href=""><h4>{{user.firstName}} {{user.lastName}}</h4></a>
                             {{model.friendsSearchResults._id}}
                         </div>
                         <div class="col-md-2 pull-right">

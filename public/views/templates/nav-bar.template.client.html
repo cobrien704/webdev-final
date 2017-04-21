@@ -29,6 +29,12 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                <li ng-if="model.user.accountType == 'ADMIN'">
+                    <a class="mooviews-font" href="#/user/{{model.user._id}}/admin">
+                        <span class="glyphicon glyphicon-user"></span>
+                        Admin Panel
+                    </a>
+                </li>
                 <li>
                     <a class="mooviews-font" href="#/user/{{model.user._id}}/profile">
                         <span class="glyphicon glyphicon-user"></span>

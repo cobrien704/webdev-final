@@ -11,7 +11,9 @@ module.exports = function() {
         findUserByEmail: findUserByEmail,
         findUsersByQuery: findUsersByQuery,
         findUserByCredentials: findUserByCredentials,
-        findUserByGoogleId: findUserByGoogleId
+        findAllUsers: findAllUsers,
+        findUserByGoogleId: findUserByGoogleId,
+        deleteUser: deleteUser
     };
 
     return api;
@@ -40,7 +42,15 @@ module.exports = function() {
         return UserModel.findOne({ email: email, password: password });
     }
 
+    function findAllUsers() {
+        return UserModel.find({});
+    }
+
     function findUserByGoogleId(googleId) {
         return UserModel.findOne({'google.id': googleId});
+    }
+
+    function deleteUser(userId) {
+        return UserModel.remove({ _id: userId });
     }
 };
