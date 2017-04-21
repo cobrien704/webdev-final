@@ -74,6 +74,7 @@
                         .createActivity(vm.userId, activity)
                         .then(function (response) {
                             init();
+                            location.reload();
                         });
                 });
         }
