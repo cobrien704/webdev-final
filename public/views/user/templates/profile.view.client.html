@@ -9,14 +9,15 @@
             <center>
                 <h3><img src="../images/moovies-type-logo-black.png" alt="M-App" height="100" width="500"></h3>
             </center>
-            <div class="well profile">
+            <hr class="colorgraph">
+            <div>
                 <div class="col-sm-12">
                     <div class="col-xs-12 col-sm-8">
                         <h2>{{model.user.firstName}} {{model.user.lastName}}</h2>
-                        <strong>Birthday: </strong> {{model.user.birthday}}
+                        <div ng-if="model.user.birthday"><strong>Birthday: </strong> {{model.user.birthday}}</div>
                         <br>
                         <strong>User Since: </strong><text ng-bind="model.user.dateCreated | date:'MM/dd/yyyy'"></text>
-                        <p><strong>Favorite Genre: </strong>
+                        <p ng-if="model.user.favGenre"><strong>Favorite Genre: </strong>
                             <span class="genre-tag">{{model.user.favGenre}}</span>
                         </p>
                     </div>

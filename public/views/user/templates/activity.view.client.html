@@ -7,6 +7,10 @@
         <h3><img src="../images/moovies-type-logo-black.png" alt="M-App" height="100" width="500"></h3>
         </center>
         <div class="list-group">
+            <div ng-if="model.feed.length === 0">
+                <h3 style="text-align: center">Start making lists and adding followers to populate your feed!</h3>
+            </div>
+
             <div ng-repeat="feedItem in model.feed" class="list-group-item">
                 <div id="feed" ng-switch="feedItem.type">
                     <div ng-switch-when="CREATE">
