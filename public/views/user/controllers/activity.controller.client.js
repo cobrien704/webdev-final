@@ -46,7 +46,7 @@
             // fix this
             setTimeout(function(){
                 showFeed();
-            }, 10);
+            }, 500);
         }
 
         function showFeed() {
