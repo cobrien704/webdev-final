@@ -65,7 +65,7 @@
                     <li ng-repeat="list in model.userMovieLists" class="list-group-item">
                         <div class="row">
                             <div class="col-md-4">
-                                <h4>{{list.title}}</h4>
+                                <h4><a href="#/user/{{model.user._id}}/lists">{{list.title}}</a></h4>
                             </div>
                             <div class="col-md-1 pull-right">
                                 <span class="badge">

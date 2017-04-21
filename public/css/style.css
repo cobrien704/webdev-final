@@ -80,7 +80,15 @@
     background: #31b0d5;
 }
 
+.btn-primary:hover {
+    background: #31b0d5;
+}
+
 .btn-danger {
+    background: #dd5683;
+}
+
+.btn-danger:hover{
     background: #dd5683;
 }
 
@@ -88,16 +96,8 @@
     background: #94d571;
 }
 
-#list-select :active{
-    background: #31b0d5;
-}
-
-#list-select2 ::selection{
-    background: #31b0d5;
-}
-
-#list-select3{
-    background: #31b0d5;
+.btn-success:hover {
+    background: #94d571;
 }
 
 /*trying to change link color*/
