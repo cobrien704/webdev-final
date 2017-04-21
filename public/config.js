@@ -32,6 +32,12 @@
                 controllerAs: 'model',
                 resolve: { loggedin: checkLoggedin }
             })
+            .when('/user/:uid/lists/:fid/', {
+                templateUrl: 'views/publicViews/templates/publiclists.view.client.html',
+                controller: 'PublicListsController',
+                controllerAs: 'model',
+                resolve: { loggedin: checkLoggedin }
+            })
             .when('/user/:uid/movie/:mid', {
                 templateUrl: 'views/user/templates/movie-details.view.client.html',
                 controller: 'MovieDetailsController',
