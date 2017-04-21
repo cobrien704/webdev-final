@@ -58,7 +58,7 @@
             </li>
         </ul>
 
-        <a class="btn btn-danger btn-block" ng-click="model.deleteList(selected._id)">
+        <a ng-if="selected._id" class="btn btn-danger btn-block" ng-click="model.deleteList(selected._id)">
             Delete List
         </a>
     </div>
