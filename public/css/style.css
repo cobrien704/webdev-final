@@ -129,3 +129,8 @@ a:visited {
     color: #ed5495;
 }
 
+/*working with images*/
+.moovies-app-logo {
+    background-image: url('../images/moovies-app-logo.png');
+}
+
