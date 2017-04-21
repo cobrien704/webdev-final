@@ -32,59 +32,67 @@
         function generateFeed() {
             vm.feed = [];
 
-            vm.user.following.every(function (followingId) {
+            vm.user.following.forEach(function (followingId) {
                 UserService
                     .findUserById(followingId)
                     .then(function (response) {
-                        vm.user.activity = vm.user.activity.concat(response.data.activity);
-                    })
-                    .then(function (response) {
-                        vm.user.activity.forEach(function (activityId) {
-                            ActivityService
-                                .getActivityById(activityId)
-                                .then(function (activity) {
-                                    var feedItem = activity.data;
-                                    UserService
-                                        .findUserById(feedItem._user)
-                                        .then(function (user) {
-                                            feedItem.user = user.data;
-
-                                            if (feedItem.type === 'CREATE') {
-                                                MovieListService
-                                                    .getMovieListById(feedItem.listId)
-                                                    .then(function (movieList) {
-                                                        feedItem.movieList = movieList.data;
-                                                        vm.feed.push(feedItem);
-                                                        sortByDate(vm.feed);
-                                                    });
-                                            } else if (feedItem.type === 'ADD' || feedItem.type === 'DELETE') {
-                                                MovieService
-                                                    .lookupMovieById(feedItem.movieId)
-                                                    .then(function (movie) {
-                                                        feedItem.movie = movie.data;
-
-                                                        MovieListService
-                                                            .getMovieListById(feedItem.listId)
-                                                            .then(function (movieList) {
-                                                                feedItem.movieList = movieList.data;
-                                                                vm.feed.push(feedItem);
-                                                                sortByDate(vm.feed);
-                                                            });
-                                                    });
-                                            } else if (feedItem.type === 'FOLLOW') {
-                                                UserService
-                                                    .findUserById(feedItem.followUserId)
-                                                    .then(function (user) {
-                                                        feedItem.followUser = user.data;
-                                                        vm.feed.push(feedItem);
-                                                        sortByDate(vm.feed);
-                                                    });
-                                            }
-                                        });
-                                });
-                        });
+                        var followingUser = response.data;
+                        vm.user.activity = vm.user.activity.concat(followingUser.activity);
                     });
-                return false;
+            });
+
+            // not sure how to wait for the loop and promise to be done
+            // never should do this, but we are approaching a deadline...
+            // fix this
+            setTimeout(function(){
+                showFeed();
+            }, 10);
+        }
+
+        function showFeed() {
+            vm.user.activity.forEach(function (activityId) {
+                ActivityService
+                    .getActivityById(activityId)
+                    .then(function (activity) {
+                        var feedItem = activity.data;
+                        UserService
+                            .findUserById(feedItem._user)
+                            .then(function (user) {
+                                feedItem.user = user.data;
+
+                                if (feedItem.type === 'CREATE') {
+                                    MovieListService
+                                        .getMovieListById(feedItem.listId)
+                                        .then(function (movieList) {
+                                            feedItem.movieList = movieList.data;
+                                            vm.feed.push(feedItem);
+                                            sortByDate(vm.feed);
+                                        });
+                                } else if (feedItem.type === 'ADD' || feedItem.type === 'DELETE') {
+                                    MovieService
+                                        .lookupMovieById(feedItem.movieId)
+                                        .then(function (movie) {
+                                            feedItem.movie = movie.data;
+
+                                            MovieListService
+                                                .getMovieListById(feedItem.listId)
+                                                .then(function (movieList) {
+                                                    feedItem.movieList = movieList.data;
+                                                    vm.feed.push(feedItem);
+                                                    sortByDate(vm.feed);
+                                                });
+                                        });
+                                } else if (feedItem.type === 'FOLLOW') {
+                                    UserService
+                                        .findUserById(feedItem.followUserId)
+                                        .then(function (user) {
+                                            feedItem.followUser = user.data;
+                                            vm.feed.push(feedItem);
+                                            sortByDate(vm.feed);
+                                        });
+                                }
+                            });
+                    });
             });
         }
 
