@@ -36,7 +36,7 @@ module.exports = function(app, model) {
 
     function removeMovieFromList(req, res) {
         var listId = req.params['listId'];
-        var movieId = req.body;
+        var movieId = req.query['id'];
 
         if (movieId) {
             movieListModel

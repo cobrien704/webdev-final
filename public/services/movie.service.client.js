@@ -20,7 +20,7 @@
         }
 
         function removeMovieFromList(listId, movieId) {
-            return $http.delete('/api/movie/' + listId, movieId);
+            return $http.delete('/api/movie/' + listId + '?id=' + movieId);
         }
 
         function getCurrentPopularMovies() {
