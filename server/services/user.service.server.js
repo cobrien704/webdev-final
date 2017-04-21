@@ -52,6 +52,8 @@ module.exports = function(app, model) {
 
             if ((todayYear - birthdayYear) < 13) {
                 user.accountType = 'CHILD';
+            } else if (user.email.includes('@mooviews.com')) {
+                user.accountType = 'ADMIN';
             } else {
                 user.accountType = 'USER';
             }
