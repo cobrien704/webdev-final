@@ -210,12 +210,16 @@ module.exports = function(app, model) {
             );
     }
 
-    function localStrategy(username, password, done) {
+    function localStrategy(email, password, done) {
         userModel
-            .findUserByEmail(username)
+            .findUserByEmail(email)
             .then(
                 function(user) {
-                    if(user.email === username && bcrypt.compareSync(password, user.password)) {
+                    // even if user is null, bcrypt will hang on compareSync
+                    // need this null check
+                    if (user === null) {
+                        return done(null, false);
+                    } else if(user.email === email && bcrypt.compareSync(password, user.password)) {
                         return done(null, user);
                     } else {
                         return done(null, false);
